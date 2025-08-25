@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artur Rodrigues — Software Engineer</title>
+    <meta name="description" content="Portfolio of Artur Rodrigues — Software Engineer. Projects in React/Next.js, .NET, Python, AI (RAG), and mobile apps." />
+    <meta property="og:title" content="Artur Rodrigues — Software Engineer" />
+    <meta property="og:description" content="Projects in React/Next.js, .NET, Python, AI (RAG), and mobile apps." />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script src="./assets/js/tailwind-config.js"></script>
+
+    <!-- External Libraries CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+
+    <!-- Lucide Icons -->
+    <script defer src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- JSON-LD for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Artur Rodrigues",
+        "jobTitle": "Software Engineer",
+        "url": "https://your-domain.dev",
+        "sameAs": [
+          "https://github.com/ArturRSA19",
+          "https://www.linkedin.com/in/arturrsa19/"
+        ]
+      }
+    </script>
+  </head>
+
+  <body class="antialiased bg-white text-gray-800 dark:bg-gray-950 dark:text-gray-100">
+    <!-- Theme bootstrap (prevent flash) -->
+    <script>
+      (function() {
+        const ls = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (ls === 'dark' || (!ls && prefersDark)) document.documentElement.classList.add('dark');
+      })();
+    </script>
+
+    <!-- Decorative background -->
+    <div aria-hidden="true" class="fixed inset-0 -z-10">
+      <div class="absolute -top-40 -right-32 h-[28rem] w-[28rem] rounded-full blur-3xl opacity-40 dark:opacity-30 bg-gradient-to-tr from-brand-400 via-teal-400 to-cyan-400"></div>
+      <div class="absolute -bottom-48 -left-20 h-[30rem] w-[30rem] rounded-full blur-3xl opacity-40 dark:opacity-30 bg-gradient-to-tr from-emerald-400 via-brand-500 to-teal-600"></div>
+      <div class="absolute inset-0 bg-grid opacity-[0.15] dark:opacity-[0.08]"></div>
+    </div>
+
+    <!-- Header Component -->
+    <header class="sticky top-0 z-50">
+      <nav class="glass border-b border-white/20 dark:border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <a href="#home" class="font-black tracking-tight text-xl md:text-2xl">AR<span class="text-brand-500">.</span></a>
+          <div class="hidden md:flex items-center gap-4 text-sm font-medium">
+            <a href="#about" class="hover:text-brand-500" data-i18n="nav.about">About</a>
+            <a href="#skills" class="hover:text-brand-500" data-i18n="nav.skills">Skills</a>
+            <a href="#projects" class="hover:text-brand-500" data-i18n="nav.projects">Projects</a>
+            <a href="#experience" class="hover:text-brand-500" data-i18n="nav.experience">Experience</a>
+            <a href="#contact" class="hover:text-brand-500" data-i18n="nav.contact">Contact</a>
+            <div class="inline-flex items-center gap-2">
+              <label for="langSelect" class="sr-only">Language</label>
+              <select id="langSelect" class="px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 appearance-none">
+                <option value="en">EN</option>
+                <option value="pt">PT</option>
+              </select>
+            </div>
+            <button id="themeToggle" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-brand-500 dark:hover:border-brand-500 transition">
+              <i data-lucide="sun" class="h-4 w-4 hidden dark:inline"></i>
+              <i data-lucide="moon" class="h-4 w-4 dark:hidden"></i>
+              <span class="sr-only">Toggle theme</span>
+            </button>
+          </div>
+          <div class="md:hidden flex items-center gap-3">
+            <button id="mobileToggle" class="p-2 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-brand-500 transition">
+              <i data-lucide="menu" class="h-5 w-5"></i>
+              <span class="sr-only">Open menu</span>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden px-6 pb-6 md:hidden">
+          <div class="flex flex-col gap-3 text-sm">
+            <a href="#about" class="py-2" data-i18n="nav.about">About</a>
+            <a href="#skills" class="py-2" data-i18n="nav.skills">Skills</a>
+            <a href="#projects" class="py-2" data-i18n="nav.projects">Projects</a>
+            <a href="#experience" class="py-2" data-i18n="nav.experience">Experience</a>
+            <a href="#contact" class="py-2" data-i18n="nav.contact">Contact</a>
+            <div class="flex items-center gap-2">
+              <select id="langSelectMobile" class="px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 appearance-none">
+                <option value="en">EN</option>
+                <option value="pt">PT</option>
+              </select>
+              <button id="themeToggleMobile" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-brand-500 transition">
+                <i data-lucide="sun" class="h-4 w-4 hidden dark:inline"></i>
+                <i data-lucide="moon" class="h-4 w-4 dark:hidden"></i>
+                <span class="sr-only">Toggle theme</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative">
+      <div class="max-w-7xl mx-auto px-6 py-24 md:py-32">
+        <div class="grid md:grid-cols-12 gap-10 items-center">
+          <div class="md:col-span-7" data-aos="fade-right">
+            <p class="uppercase tracking-widest text-xs text-gray-500 dark:text-gray-400 mb-3" data-i18n="hero.tagline">Portfolio 2025</p>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05]">
+              <span data-i18n="hero.heading_pre">Hi, I'm</span>
+              <span class="bg-gradient-to-tr from-brand-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent"> Artur Rodrigues.</span>
+            </h1>
+            <p class="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl" data-i18n="hero.body">
+              Software Engineer focused on building reliable, performant products. I work with <strong>React/Next.js</strong>, <strong>.NET/C#</strong>, <strong>Java</strong>, and <strong>Python/AI</strong> (RAG, LLMs). I love shipping beautiful, accessible interfaces and robust backends.
+            </p>
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <a href="#projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-glow" data-i18n="hero.btn_projects">
+                View Projects
+              </a>
+              <a href="https://github.com/ArturRSA19" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-500" data-i18n="hero.btn_github">
+                GitHub
+              </a>
+              <a href="./assets/docs/cv.pdf" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-500" data-i18n="hero.btn_cv">
+                Download CV
+              </a>
+            </div>
+          </div>
+          <div class="md:col-span-5" data-aos="fade-left">
+            <div class="relative">
+              <div class="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-brand-500 via-teal-500 to-cyan-500 blur opacity-40"></div>
+              <div class="relative aspect-square rounded-3xl overflow-hidden border border-white/30 dark:border-white/10">
+                <img alt="Artur Rodrigues" src="./assets/images/profile.png" class="h-full w-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop'" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="grid md:grid-cols-12 gap-10 items-center">
+          <div class="md:col-span-7" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold" data-i18n="about.title">About</h2>
+            <p class="mt-5 text-gray-600 dark:text-gray-300 leading-relaxed" data-i18n="about.body">
+              I'm a Software Engineering student at the University of Brasília and a developer passionate about clean design and thoughtful architecture. My recent work includes a <strong>RAG-based chatbot</strong> for querying institutional documents, a <strong>React Native</strong> app with <strong>.NET</strong> integrations, and data dashboards powered by modern APIs. I enjoy mentoring friends, documenting decisions, and delivering features with strong testing.
+            </p>
+          </div>
+          <div class="md:col-span-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 glass">
+                <div class="text-3xl font-extrabold">5+</div>
+                <div class="text-sm text-gray-500" data-i18n="about.stats.years">Years coding</div>
+              </div>
+              <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 glass">
+                <div class="text-3xl font-extrabold">15+</div>
+                <div class="text-sm text-gray-500" data-i18n="about.stats.shipped">Projects shipped</div>
+              </div>
+              <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 glass">
+                <div class="text-3xl font-extrabold">6</div>
+                <div class="text-sm text-gray-500" data-i18n="about.stats.stacks">Main stacks</div>
+              </div>
+              <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 glass">
+                <div class="text-3xl font-extrabold">100%</div>
+                <div class="text-sm text-gray-500" data-i18n="about.stats.userfocused">User-focused</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 border-y border-gray-100 dark:border-gray-900">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold" data-i18n="skills.title">Skills</h2>
+        <div class="grid md:grid-cols-4 gap-6 mt-8">
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up">
+            <h3 class="font-semibold mb-2" data-i18n="skills.frontend">Frontend</h3>
+            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>React, Next.js, Tailwind</li>
+              <li>TypeScript, Vite</li>
+              <li data-i18n="skills.a11y">Accessibility (WCAG)</li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="50">
+            <h3 class="font-semibold mb-2" data-i18n="skills.backend">Backend</h3>
+            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>.NET (C#), Node.js</li>
+              <li>Java (Spring), REST</li>
+              <li data-i18n="skills.backend_extra">Auth, Caching, Queues</li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="font-semibold mb-2" data-i18n="skills.dataai">Data & AI</h3>
+            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>Python, Pandas</li>
+              <li>RAG, Vector DBs</li>
+              <li>PostgreSQL, MySQL</li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="150">
+            <h3 class="font-semibold mb-2" data-i18n="skills.devops">DevOps & QA</h3>
+            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>Docker, CI/CD</li>
+              <li>Jest/RTL, xUnit</li>
+              <li>Git, GitLab/GitHub</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects (Swiper) -->
+    <section class="py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center justify-between gap-4 mb-6">
+          <h2 class="text-3xl md:text-4xl font-bold" data-i18n="featured.title">Featured</h2>
+          <div class="flex items-center gap-2">
+            <button class="swiper-button-prev-static p-2 rounded-lg border border-gray-200 dark:border-gray-800"><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
+            <button class="swiper-button-next-static p-2 rounded-lg border border-gray-200 dark:border-gray-800"><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
+          </div>
+        </div>
+        <div class="swiper" id="featured-swiper" data-aos="fade-up">
+          <div class="swiper-wrapper"><!-- Slides injected by JS --></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-3xl md:text-4xl font-bold" data-i18n="projects.title">Projects</h2>
+          <a href="https://github.com/ArturRSA19?tab=repositories" target="_blank" rel="noopener" class="text-sm hover:text-brand-500" data-i18n="projects.see_all">See all →</a>
+        </div>
+        <div id="project-grid" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Cards injected by JS --></div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold" data-i18n="experience.title">Experience</h2>
+        <div class="mt-8 space-y-6">
+          <!-- UGestor Experience -->
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="font-semibold" data-i18n="experience.ugestor.role">Junior Full-Stack Developer — UGestor</h3>
+                <p class="text-sm text-gray-500" data-i18n="experience.ugestor.meta">C#, Java, MVC & Business Intelligence • Jul 2025 — Aug 2025</p>
+              </div>
+            </div>
+            <ul class="mt-3 list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li data-i18n="experience.ugestor.b1">Developed with C# MVC and Razor Pages for new BI system implementation.</li>
+              <li data-i18n="experience.ugestor.b2">Maintained legacy Java system using JPA for data persistence.</li>
+            </ul>
+          </div>
+
+          <!-- Pagglo Experience -->
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="50">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="font-semibold" data-i18n="experience.pagglo.role">Frontend Developer — Pagglo (Internship)</h3>
+                <p class="text-sm text-gray-500" data-i18n="experience.pagglo.meta">React Native, TypeScript & .NET integrations • Jan 2024 — May 2025</p>
+              </div>
+            </div>
+            <ul class="mt-3 list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li data-i18n="experience.pagglo.b1">Developed iOS/Android applications with React Native, Redux Toolkit, and TypeScript.</li>
+              <li data-i18n="experience.pagglo.b2">Integrated with C# .NET APIs using Postman and participated in Scrum methodologies.</li>
+            </ul>
+          </div>
+
+          <!-- MEPA Energia Experience -->
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="font-semibold" data-i18n="experience.mepa.role">Full-Stack Developer — UnB/MEPA Energia</h3>
+            <p class="text-sm text-gray-500" data-i18n="experience.mepa.meta">React, TypeScript, Python & Django • Nov 2024 — Mar 2025</p>
+            <ul class="mt-3 list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li data-i18n="experience.mepa.b1">Developed website functionalities using React, TypeScript, and Python Django.</li>
+              <li data-i18n="experience.mepa.b2">Worked with Docker containerization and Git/GitLab version control.</li>
+            </ul>
+          </div>
+
+          <!-- Acessa UnB Experience -->
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="150">
+            <h3 class="font-semibold" data-i18n="experience.acessa.role">Full-Stack Developer — Acessa UnB (DACES/UnB)</h3>
+            <p class="text-sm text-gray-500" data-i18n="experience.acessa.meta">Flutter, Node.js & MySQL • Apr 2024 — Jan 2025</p>
+            <ul class="mt-3 list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li data-i18n="experience.acessa.b1">University extension project developing mobile app for accessibility on campus.</li>
+              <li data-i18n="experience.acessa.b2">Built with Flutter/Dart frontend and Node.js + MySQL backend.</li>
+            </ul>
+          </div>
+
+          <!-- DNIT Experience -->
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="font-semibold" data-i18n="experience.dnit.role">Full-Stack Developer — UnB/DNIT</h3>
+            <p class="text-sm text-gray-500" data-i18n="experience.dnit.meta">.NET, React, TypeScript & PostgreSQL • Mar 2023 — Jul 2023</p>
+            <ul class="mt-3 list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li data-i18n="experience.dnit.b1">Developed web solutions for DNIT project assisting schools near highways.</li>
+              <li data-i18n="experience.dnit.b2">Used .NET, C#, React, TypeScript, PostgreSQL with Figma for design.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold" data-i18n="contact.title">Contact</h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-300" data-i18n="contact.subtitle">Open to internships, junior roles, and freelance work. Let's build something great.</p>
+
+        <div class="grid sm:grid-cols-2 gap-6 mt-8">
+          <a href="mailto:artur190503@outlook.com" class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass flex items-center gap-3 hover:border-brand-500" data-aos="fade-up">
+            <i data-lucide="mail" class="h-5 w-5"></i>
+            <span data-i18n="contact.email">Email</span>
+          </a>
+          <a href="https://www.linkedin.com/in/arturrsa19/" target="_blank" rel="noopener" class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass flex items-center gap-3 hover:border-brand-500" data-aos="fade-up" data-aos-delay="50">
+            <i data-lucide="linkedin" class="h-5 w-5"></i>
+            <span data-i18n="contact.linkedin">LinkedIn</span>
+          </a>
+          <a href="https://github.com/ArturRSA19" target="_blank" rel="noopener" class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass flex items-center gap-3 hover:border-brand-500" data-aos="fade-up" data-aos-delay="100">
+            <i data-lucide="github" class="h-5 w-5"></i>
+            <span data-i18n="contact.github">GitHub</span>
+          </a>
+          <a href="https://t.me/ArturRSA19" target="_blank" rel="noopener" class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass flex items-center gap-3 hover:border-brand-500" data-aos="fade-up" data-aos-delay="150">
+            <i data-lucide="message-circle" class="h-5 w-5"></i>
+            <span data-i18n="contact.telegram">Telegram</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-gray-500">© <span id="year"></span> <span>Artur Rodrigues.</span> <span data-i18n="footer.rights">All rights reserved.</span></p>
+        <div class="flex items-center gap-3 text-sm text-gray-500">
+          <a href="#home" class="hover:text-brand-500 inline-flex items-center gap-1"><i data-lucide="arrow-up" class="h-4 w-4"></i> <span data-i18n="footer.back_to_top">Back to top</span></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- External Libraries JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/i18n.js"></script>
+    <script src="./assets/js/app.js"></script>
+  </body>
+</html>

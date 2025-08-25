@@ -1,0 +1,44 @@
+{
+  "name": "artur-rodrigues-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio pessoal de Artur Rodrigues - Software Engineer",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx live-server --port=3000 --open=index.html",
+    "build": "echo 'Building project...' && echo 'Project ready for deploy!'",
+    "serve": "npx http-server -p 8080 -o index.html",
+    "lint": "echo 'Linting project...'",
+    "format": "echo 'Formatting code...'"
+  },
+  "keywords": [
+    "portfolio",
+    "javascript",
+    "html",
+    "css",
+    "tailwind",
+    "responsive",
+    "software-engineer"
+  ],
+  "author": {
+    "name": "Artur Rodrigues",
+    "email": "artur@email.com",
+    "url": "https://your-domain.dev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-github/portfolio"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "http-server": "^14.1.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

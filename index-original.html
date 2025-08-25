@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artur Rodrigues — Software Engineer</title>
+    <meta name="description" content="Portfolio of Artur Rodrigues — Software Engineer. Projects in React/Next.js, .NET, Python, AI (RAG), and mobile apps." />
+    <meta property="og:title" content="Artur Rodrigues — Software Engineer" />
+    <meta property="og:description" content="Projects in React/Next.js, .NET, Python, AI (RAG), and mobile apps." />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+            colors: {
+              brand: {
+                50: '#eef2ff',
+                100: '#e0e7ff',
+                200: '#c7d2fe',
+                300: '#a5b4fc',
+                400: '#818cf8',
+                500: '#6366f1',
+                600: '#4f46e5',
+                700: '#4338ca',
+                800: '#3730a3',
+                900: '#312e81'
+              }
+            },
+            boxShadow: {
+              glow: '0 10px 25px -5px rgba(99,102,241,0.45), 0 10px 10px -5px rgba(99,102,241,0.25)'
+            }
+          }
+        }
+      };
+    </script>
+
+    <!-- Flowbite (Tailwind components) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" />
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+    <!-- AOS (Animate on Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <!-- Lucide Icons -->
+    <script defer src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom utilities -->
+    <style>
+      :root { color-scheme: light dark; }
+      html, body { height: 100%; }
+      .bg-grid {
+        background-image: linear-gradient(rgba(99,102,241,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.1) 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .tilt { transform-style: preserve-3d; transition: transform .2s ease; }
+      .tilt:hover .tilt-child { transform: translateZ(16px); }
+      .glass { backdrop-filter: blur(10px); background: rgba(255,255,255,0.6); }
+      .dark .glass { background: rgba(17,24,39,0.6); }
+      /* Legibility helpers */
+      #project-grid h3, #featured-swiper h3 { text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+      .tag { font-size: .75rem; padding: .25rem .5rem; border-radius: .375rem; }
+      .tag-light { background: #f3f4f6; color: #374151; }
+      .dark .tag-light { background: rgba(255,255,255,.08); color: #e5e7eb; }
+    </style>
+
+    <!-- JSON-LD (SEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Artur Rodrigues",
+        "jobTitle": "Software Engineer",
+        "url": "https://your-domain.dev",
+        "sameAs": [
+          "https://github.com/your-github",
+          "https://www.linkedin.com/in/your-linkedin"
+        ]
+      }
+    </script>
+  </head>
+
+  <body class="antialiased bg-white text-gray-800 dark:bg-gray-950 dark:text-gray-100">
+    <!-- Theme bootstrap (no flash) -->
+    <script>
+      (function() {
+        const ls = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (ls === 'dark' || (!ls && prefersDark)) document.documentElement.classList.add('dark');
+      })();
+    </script>
+
+    <!-- Decorative background -->
+    <div aria-hidden="true" class="fixed inset-0 -z-10">
+      <div class="absolute -top-40 -right-32 h-[28rem] w-[28rem] rounded-full blur-3xl opacity-40 dark:opacity-30 bg-gradient-to-tr from-brand-400 via-fuchsia-400 to-cyan-400"></div>
+      <div class="absolute -bottom-48 -left-20 h-[30rem] w-[30rem] rounded-full blur-3xl opacity-40 dark:opacity-30 bg-gradient-to-tr from-emerald-400 via-brand-500 to-indigo-600"></div>
+      <div class="absolute inset-0 bg-grid opacity-[0.15] dark:opacity-[0.08]"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50">
+      <nav class="glass border-b border-white/20 dark:border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <a href="#home" class="font-black tracking-tight text-xl md:text-2xl">AR<span class="text-brand-500">.</span></a>
+          <div class="hidden md:flex items-center gap-4 text-sm font-medium">
+            <a href="#about" class="hover:text-brand-500" data-i18n="nav.about">About</a>
+            <a href="#skills" class="hover:text-brand-500" data-i18n="nav.skills">Skills</a>
+            <a href="#projects" class="hover:text-brand-500" data-i18n="nav.projects">Projects</a>
+            <a href="#experience" class="hover:text-brand-500" data-i18n="nav.experience">Experience</a>
+            <a href="#contact" class="hover:text-brand-500" data-i18n="nav.contact">Contact</a>
+            <div class="inline-flex items-center gap-2">
+              <label for="langSelect" class="sr-only">Language</label>
+              <select id="langSelect" class="px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 appearance-none">
+                <option value="en">EN</option>
+                <option value="pt">PT</option>
+              </select>
+            </div>
+            <button id="themeToggle" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-brand-500 dark:hover:border-brand-500 transition">
+              <i data-lucide="sun" class="h-4 w-4 hidden dark:inline"></i>
+              <i data-lucide="moon" class="h-4 w-4 dark:hidden"></i>
+              <span class="sr-only">Toggle theme</span>
+            </button>
+          </div>
+          <div class="md:hidden flex items-center gap-3">
+            <button id="mobileToggle" class="p-2 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-brand-500 transition">
+              <i data-lucide="menu" class="h-5 w-5"></i>
+              <span class="sr-only">Open menu</span>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden px-6 pb-6 md:hidden">
+          <div class="flex flex-col gap-3 text-sm">
+            <a href="#about" class="py-2" data-i18n="nav.about">About</a>
+            <a href="#skills" class="py-2" data-i18n="nav.skills">Skills</a>
+            <a href="#projects" class="py-2" data-i18n="nav.projects">Projects</a>
+            <a href="#experience" class="py-2" data-i18n="nav.experience">Experience</a>
+            <a href="#contact" class="py-2" data-i18n="nav.contact">Contact</a>
+            <div class="flex items-center gap-2">
+              <select id="langSelectMobile" class="px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 appearance-none">
+                <option value="en">EN</option>
+                <option value="pt">PT</option>
+              </select>
+              <button id="themeToggleMobile" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-brand-500 transition">
+                <i data-lucide="sun" class="h-4 w-4 hidden dark:inline"></i>
+                <i data-lucide="moon" class="h-4 w-4 dark:hidden"></i>
+                <span class="sr-only">Toggle theme</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="relative">
+      <div class="max-w-7xl mx-auto px-6 py-24 md:py-32">
+        <div class="grid md:grid-cols-12 gap-10 items-center">
+          <div class="md:col-span-7" data-aos="fade-right">
+            <p class="uppercase tracking-widest text-xs text-gray-500 dark:text-gray-400 mb-3" data-i18n="hero.tagline">Portfolio 2025</p>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05]">
+              <span data-i18n="hero.heading_pre">Hi, I’m</span>
+              <span class="bg-gradient-to-tr from-brand-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent"> Artur Rodrigues.</span>
+            </h1>
+            <p class="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl" data-i18n="hero.body">
+              Software Engineer focused on building reliable, performant products. I work with <strong>React/Next.js</strong>, <strong>.NET/C#</strong>, <strong>Java</strong>, and <strong>Python/AI</strong> (RAG, LLMs). I love shipping beautiful, accessible interfaces and robust backends.
+            </p>
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <a href="#projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-glow" data-i18n="hero.btn_projects">
+                View Projects
+              </a>
+              <a href="https://github.com/your-github" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-500" data-i18n="hero.btn_github">
+                GitHub
+              </a>
+              <a href="/cv.pdf" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-500" data-i18n="hero.btn_cv">
+                Download CV
+              </a>
+            </div>
+          </div>
+          <div class="md:col-span-5" data-aos="fade-left">
+            <div class="relative">
+              <div class="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-brand-500 via-fuchsia-500 to-cyan-500 blur opacity-40"></div>
+              <div class="relative aspect-square rounded-3xl overflow-hidden border border-white/30 dark:border-white/10">
+                <img alt="Artur Rodrigues" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" class="h-full w-full object-cover" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-20">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="grid md:grid-cols-12 gap-10 items-center">
+          <div class="md:col-span-7" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold" data-i18n="about.title">About</h2>
+            <p class="mt-5 text-gray-600 dark:text-gray-300 leading-relaxed" data-i18n="about.body">
+              I’m a Software Engineering student at the University of Brasília and a developer passionate about clean design and thoughtful architecture. My recent work includes a <strong>RAG-based chatbot</strong> for querying institutional documents, a <strong>React Native</strong> app with <strong>.NET</strong> integrations, and data dashboards powered by modern APIs. I enjoy mentoring friends, documenting decisions, and delivering features with strong testing.
+            </p>
+          </div>
+          <div class="md:col-span-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 glass">
+                <div class="text-3xl font-extrabold">5+</div>
+                <div class="text-sm text-gray-500" data-i18n="about.stats.years">Years coding</div>
+              </div>
+              <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 glass">
+                <div class="text-3xl font-extrabold">15+</div>
+                <div class="text-sm text-gray-500" data-i18n="about.stats.shipped">Projects shipped</div>
+              </div>
+              <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 glass">
+                <div class="text-3xl font-extrabold">6</div>
+                <div class="text-sm text-gray-500" data-i18n="about.stats.stacks">Main stacks</div>
+              </div>
+              <div class="p-5 rounded-2xl border border-gray-200 dark:border-gray-800 glass">
+                <div class="text-3xl font-extrabold">100%</div>
+                <div class="text-sm text-gray-500" data-i18n="about.stats.userfocused">User-focused</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-20 border-y border-gray-100 dark:border-gray-900">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold" data-i18n="skills.title">Skills</h2>
+        <div class="grid md:grid-cols-4 gap-6 mt-8">
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up">
+            <h3 class="font-semibold mb-2" data-i18n="skills.frontend">Frontend</h3>
+            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>React, Next.js, Tailwind</li>
+              <li>TypeScript, Vite</li>
+              <li data-i18n="skills.a11y">Accessibility (WCAG)</li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="50">
+            <h3 class="font-semibold mb-2" data-i18n="skills.backend">Backend</h3>
+            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>.NET (C#), Node.js</li>
+              <li>Java (Spring), REST</li>
+              <li data-i18n="skills.backend_extra">Auth, Caching, Queues</li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="font-semibold mb-2" data-i18n="skills.dataai">Data & AI</h3>
+            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>Python, Pandas</li>
+              <li>RAG, Vector DBs</li>
+              <li>PostgreSQL, MySQL</li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="150">
+            <h3 class="font-semibold mb-2" data-i18n="skills.devops">DevOps & QA</h3>
+            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>Docker, CI/CD</li>
+              <li>Jest/RTL, xUnit</li>
+              <li>Git, GitLab/GitHub</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured (Swiper) -->
+    <section class="py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center justify-between gap-4 mb-6">
+          <h2 class="text-3xl md:text-4xl font-bold" data-i18n="featured.title">Featured</h2>
+          <div class="flex items-center gap-2">
+            <button class="swiper-button-prev-static p-2 rounded-lg border border-gray-200 dark:border-gray-800"><i data-lucide="chevron-left" class="h-5 w-5"></i></button>
+            <button class="swiper-button-next-static p-2 rounded-lg border border-gray-200 dark:border-gray-800"><i data-lucide="chevron-right" class="h-5 w-5"></i></button>
+          </div>
+        </div>
+        <div class="swiper" id="featured-swiper" data-aos="fade-up">
+          <div class="swiper-wrapper"><!-- Slides injected by JS --></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-20 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-3xl md:text-4xl font-bold" data-i18n="projects.title">Projects</h2>
+          <a href="https://github.com/your-github?tab=repositories" target="_blank" rel="noopener" class="text-sm hover:text-brand-500" data-i18n="projects.see_all">See all →</a>
+        </div>
+        <div id="project-grid" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Cards injected by JS --></div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="py-20">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold" data-i18n="experience.title">Experience</h2>
+        <div class="mt-8 space-y-6">
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="font-semibold" data-i18n="experience.pagglo.role">Software Engineer — Pagglo</h3>
+                <p class="text-sm text-gray-500" data-i18n="experience.pagglo.meta">React Native & .NET integrations • 2024 — Present</p>
+              </div>
+              <span class="text-xs px-2 py-1 rounded bg-brand-600 text-white" data-i18n="experience.current">Currently</span>
+            </div>
+            <ul class="mt-3 list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li data-i18n="experience.pagglo.b1">Built mobile features with robust API contracts and error handling.</li>
+              <li data-i18n="experience.pagglo.b2">Improved app performance, accessibility, and release stability.</li>
+            </ul>
+          </div>
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="font-semibold" data-i18n="experience.unb.role">University Projects — UnB</h3>
+            <p class="text-sm text-gray-500" data-i18n="experience.unb.meta">AI, Embedded Systems, and Full‑Stack • 2021 — 2025</p>
+            <ul class="mt-3 list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li data-i18n="experience.unb.b1">RAG chatbot to query meeting minutes & administrative docs.</li>
+              <li data-i18n="experience.unb.b2">Assistive navigation app (Flutter + Node + MySQL).</li>
+              <li data-i18n="experience.unb.b3">Jetson Xavier NX review & documentation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold" data-i18n="contact.title">Contact</h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-300" data-i18n="contact.subtitle">Open to internships, junior roles, and freelance work. Let’s build something great.</p>
+
+        <div class="grid sm:grid-cols-2 gap-6 mt-8">
+          <a href="mailto:artur@email.com" class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass flex items-center gap-3 hover:border-brand-500" data-aos="fade-up">
+            <i data-lucide="mail" class="h-5 w-5"></i>
+            <span data-i18n="contact.email">Email</span>
+          </a>
+          <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noopener" class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass flex items-center gap-3 hover:border-brand-500" data-aos="fade-up" data-aos-delay="50">
+            <i data-lucide="linkedin" class="h-5 w-5"></i>
+            <span data-i18n="contact.linkedin">LinkedIn</span>
+          </a>
+          <a href="https://github.com/your-github" target="_blank" rel="noopener" class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass flex items-center gap-3 hover:border-brand-500" data-aos="fade-up" data-aos-delay="100">
+            <i data-lucide="github" class="h-5 w-5"></i>
+            <span data-i18n="contact.github">GitHub</span>
+          </a>
+          <a href="https://t.me/your-telegram" target="_blank" rel="noopener" class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass flex items-center gap-3 hover:border-brand-500" data-aos="fade-up" data-aos-delay="150">
+            <i data-lucide="message-circle" class="h-5 w-5"></i>
+            <span data-i18n="contact.telegram">Telegram</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-gray-500">© <span id="year"></span> <span>Artur Rodrigues.</span> <span data-i18n="footer.rights">All rights reserved.</span></p>
+        <div class="flex items-center gap-3 text-sm text-gray-500">
+          <a href="#home" class="hover:text-brand-500 inline-flex items-center gap-1"><i data-lucide="arrow-up" class="h-4 w-4"></i> <span data-i18n="footer.back_to_top">Back to top</span></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+    <!-- App Script with i18n -->
+    <script>
+      // ========= i18n =========
+      const I18N = {
+        en: {
+          'nav.about': 'About', 'nav.skills': 'Skills', 'nav.projects': 'Projects', 'nav.experience': 'Experience', 'nav.contact': 'Contact',
+          'hero.tagline': 'Portfolio 2025', 'hero.heading_pre': 'Hi, I\u2019m', 'hero.heading_post': '.',
+          'hero.body': 'Software Engineer focused on building reliable, performant products. I work with <strong>React/Next.js</strong>, <strong>.NET/C#</strong>, <strong>Java</strong>, and <strong>Python/AI</strong> (RAG, LLMs). I love shipping beautiful, accessible interfaces and robust backends.',
+          'hero.btn_projects': 'View Projects', 'hero.btn_github': 'GitHub', 'hero.btn_cv': 'Download CV',
+          'about.title': 'About',
+          'about.body': 'I\u2019m a Software Engineering student at the University of Bras\u00edlia and a developer passionate about clean design and thoughtful architecture. My recent work includes a <strong>RAG-based chatbot</strong> for querying institutional documents, a <strong>React Native</strong> app with <strong>.NET</strong> integrations, and data dashboards powered by modern APIs. I enjoy mentoring friends, documenting decisions, and delivering features with strong testing.',
+          'about.stats.years': 'Years coding', 'about.stats.shipped': 'Projects shipped', 'about.stats.stacks': 'Main stacks', 'about.stats.userfocused': 'User-focused',
+          'skills.title': 'Skills', 'skills.frontend': 'Frontend', 'skills.backend': 'Backend', 'skills.backend_extra': 'Auth, Caching, Queues', 'skills.dataai': 'Data & AI', 'skills.devops': 'DevOps & QA', 'skills.a11y': 'Accessibility (WCAG)',
+          'featured.title': 'Featured', 'projects.title': 'Projects', 'projects.see_all': 'See all \u2192',
+          'experience.title': 'Experience', 'experience.current': 'Currently',
+          'experience.pagglo.role': 'Software Engineer \u2014 Pagglo', 'experience.pagglo.meta': 'React Native & .NET integrations \u2022 2024 \u2014 Present', 'experience.pagglo.b1': 'Built mobile features with robust API contracts and error handling.', 'experience.pagglo.b2': 'Improved app performance, accessibility, and release stability.',
+          'experience.unb.role': 'University Projects \u2014 UnB', 'experience.unb.meta': 'AI, Embedded Systems, and Full\u2011Stack \u2022 2021 \u2014 2025', 'experience.unb.b1': 'RAG chatbot to query meeting minutes & administrative docs.', 'experience.unb.b2': 'Assistive navigation app (Flutter + Node + MySQL).', 'experience.unb.b3': 'Jetson Xavier NX review & documentation.',
+          'contact.title': 'Contact', 'contact.subtitle': 'Open to internships, junior roles, and freelance work. Let\u2019s build something great.', 'contact.email': 'Email', 'contact.linkedin': 'LinkedIn', 'contact.github': 'GitHub', 'contact.telegram': 'Telegram',
+          'footer.rights': 'All rights reserved.', 'footer.back_to_top': 'Back to top'
+        },
+        pt: {
+          'nav.about': 'Sobre', 'nav.skills': 'Compet\u00eancias', 'nav.projects': 'Projetos', 'nav.experience': 'Experi\u00eancia', 'nav.contact': 'Contato',
+          'hero.tagline': 'Portf\u00f3lio 2025', 'hero.heading_pre': 'Olá, me chamo', 'hero.heading_post': '.',
+          'hero.body': 'Engenheiro de Software focado em construir produtos confi\u00e1veis e perform\u00e1ticos. Trabalho com <strong>React/Next.js</strong>, <strong>.NET/C#</strong>, <strong>Java</strong> e <strong>Python/IA</strong> (RAG, LLMs). Gosto de entregar interfaces bonitas e acess\u00edveis e backends robustos.',
+          'hero.btn_projects': 'Ver Projetos', 'hero.btn_github': 'GitHub', 'hero.btn_cv': 'Baixar CV',
+          'about.title': 'Sobre',
+          'about.body': 'Sou estudante de Engenharia de Software na Universidade de Bras\u00edlia e desenvolvedor apaixonado por design limpo e arquitetura bem pensada. Trabalhos recentes incluem um <strong>chatbot RAG</strong> para consulta a documentos institucionais, um app em <strong>React Native</strong> com integra\u00e7\u00f5es em <strong>.NET</strong> e dashboards de dados com APIs modernas. Gosto de documentar decis\u00f5es e entregar features com bons testes.',
+          'about.stats.years': 'Anos programando', 'about.stats.shipped': 'Projetos entregues', 'about.stats.stacks': 'Stacks principais', 'about.stats.userfocused': 'Foco no usu\u00e1rio',
+          'skills.title': 'Compet\u00eancias', 'skills.frontend': 'Frontend', 'skills.backend': 'Backend', 'skills.backend_extra': 'Autentica\u00e7\u00e3o, Cache, Filas', 'skills.dataai': 'Dados & IA', 'skills.devops': 'DevOps & QA', 'skills.a11y': 'Acessibilidade (WCAG)',
+          'featured.title': 'Destaques', 'projects.title': 'Projetos', 'projects.see_all': 'Ver todos \u2192',
+          'experience.title': 'Experi\u00eancia', 'experience.current': 'Atualmente',
+          'experience.pagglo.role': 'Engenheiro de Software \u2014 Pagglo', 'experience.pagglo.meta': 'React Native & integra\u00e7\u00f5es .NET \u2022 2024 \u2014 Presente', 'experience.pagglo.b1': 'Criei funcionalidades mobile com contratos de API s\u00f3lidos e tratamento de erros.', 'experience.pagglo.b2': 'Melhorei performance, acessibilidade e estabilidade de releases.',
+          'experience.unb.role': 'Projetos Universit\u00e1rios \u2014 UnB', 'experience.unb.meta': 'IA, Sistemas Embarcados e Full\u2011Stack \u2022 2021 \u2014 2025', 'experience.unb.b1': 'Chatbot RAG para consultar atas e documentos administrativos.', 'experience.unb.b2': 'App de navega\u00e7\u00e3o assistiva (Flutter + Node + MySQL).', 'experience.unb.b3': 'Revis\u00e3o e documenta\u00e7\u00e3o do Jetson Xavier NX.',
+          'contact.title': 'Contato', 'contact.subtitle': 'Aberto a est\u00e1gio, vagas j\u00fanior e freela. Vamos construir algo incrível.', 'contact.email': 'Email', 'contact.linkedin': 'LinkedIn', 'contact.github': 'GitHub', 'contact.telegram': 'Telegram',
+          'footer.rights': 'Todos os direitos reservados.', 'footer.back_to_top': 'Voltar ao topo'
+        }
+      };
+
+      function setLocale(locale) {
+        const dict = I18N[locale] || I18N.en;
+        document.documentElement.lang = (locale === 'pt') ? 'pt-BR' : 'en-US';
+        localStorage.setItem('locale', locale);
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (!key) return;
+          const val = dict[key];
+          if (val !== undefined) el.innerHTML = val; // allow inline <strong>
+        });
+        // sync selects
+        const s1 = document.getElementById('langSelect');
+        const s2 = document.getElementById('langSelectMobile');
+        if (s1) s1.value = locale === 'pt' ? 'pt' : 'en';
+        if (s2) s2.value = locale === 'pt' ? 'pt' : 'en';
+      }
+
+      function initLocale() {
+        const saved = localStorage.getItem('locale');
+        const browser = navigator.language?.toLowerCase().startsWith('pt') ? 'pt' : 'en';
+        setLocale(saved || browser || 'en');
+      }
+
+      // ========= Data (replace with your real info) =========
+      const featured = [
+        { title: 'RAG Chatbot — Institutional Docs', blurb: 'Retrieval-Augmented Generation chatbot to query meeting minutes and admin docs (Postgres + Vector Search).', image: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1400&auto=format&fit=crop', repo: 'https://github.com/your-github/rag-unb-chatbot' },
+        { title: 'uGestor Mobile — RN + .NET', blurb: 'React Native app integrated with .NET/C# backend. Solid contracts, error handling, and CI/CD.', image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop', repo: 'https://github.com/your-github/ugestor-mobile' },
+        { title: 'Crypto Dashboard — Next.js', blurb: 'Real-time crypto dashboard with user auth, charting, and API data pipelines.', image: 'https://images.unsplash.com/photo-1640340434866-6e7030e1dd1f?q=80&w=1400&auto=format&fit=crop', repo: 'https://github.com/your-github/crypto-dashboard' }
+      ];
+
+      const projects = [
+        { title: 'Assistive Navigation App', tags: ['Flutter', 'Node', 'MySQL'], image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop', repo: 'https://github.com/your-github/assistive-nav-app' },
+        { title: 'WhatsApp Medical Bot', tags: ['Python', 'RAG', 'Twilio'], image: 'https://images.unsplash.com/photo-1551281044-8d8d2aaed2d0?q=80&w=1200&auto=format&fit=crop', repo: 'https://github.com/your-github/whatsapp-med-bot' },
+        { title: 'Jetson Xavier NX — Docs', tags: ['Docs', 'Embedded', 'Research'], image: 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?q=80&w=1200&auto=format&fit=crop', repo: 'https://github.com/your-github/jetson-xavier-nx-review' },
+        { title: 'uGestor API Integrations', tags: ['C#', '.NET', 'PostgreSQL'], image: 'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=1200&auto=format&fit=crop', repo: 'https://github.com/your-github/ugestor-api' },
+        { title: 'RAG Toolkit', tags: ['Python', 'VectorDB', 'LLMs'], image: 'https://images.unsplash.com/photo-1534759846116-57968a6b17f4?q=80&w=1200&auto=format&fit=crop', repo: 'https://github.com/your-github/rag-toolkit' },
+        { title: 'Next.js UI Library', tags: ['Next.js', 'Tailwind', 'TypeScript'], image: 'https://images.unsplash.com/photo-1547658719-54cb785dbd4a?q=80&w=1200&auto=format&fit=crop', repo: 'https://github.com/your-github/next-ui' }
+      ];
+
+      // ========= DOM helpers =========
+      const $ = (sel, ctx=document) => ctx.querySelector(sel);
+      const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+      // ========= Theme toggle =========
+      function toggleTheme() {
+        const root = document.documentElement;
+        const isDark = root.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      }
+
+      // ========= Boot =========
+      document.addEventListener('DOMContentLoaded', () => {
+        // Year
+        $('#year').textContent = new Date().getFullYear();
+
+        // Icons
+        if (window.lucide) lucide.createIcons();
+
+        // Theme toggles
+        $('#themeToggle')?.addEventListener('click', toggleTheme);
+        $('#themeToggleMobile')?.addEventListener('click', toggleTheme);
+
+        // Mobile menu
+        $('#mobileToggle')?.addEventListener('click', () => {
+          $('#mobileMenu').classList.toggle('hidden');
+        });
+
+        // Language selects
+        $('#langSelect')?.addEventListener('change', (e) => setLocale(e.target.value));
+        $('#langSelectMobile')?.addEventListener('change', (e) => setLocale(e.target.value));
+
+        // AOS
+        AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true });
+
+        // Build Featured Swiper
+        const swiperEl = $('#featured-swiper .swiper-wrapper');
+        featured.forEach((f) => {
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          slide.innerHTML = `
+            <a href="${f.repo}" target="_blank" rel="noopener" class="group block">
+              <div class="relative overflow-hidden rounded-3xl border border-gray-200 dark:border-gray-800">
+                <img src="${f.image}" alt="${f.title}" class="h-72 w-full object-cover transition duration-300 group-hover:scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-0 p-6 text-white">
+                  <h3 class="font-semibold text-lg">${f.title}</h3>
+                  <p class="text-sm text-white/80 mt-1 max-w-xl">${f.blurb}</p>
+                  <span class="inline-flex items-center gap-1 text-sm mt-3 opacity-90">Open GitHub <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M13 5h6v6h-2V8.414l-9.293 9.293-1.414-1.414L15.586 7H13V5Z"/></svg></span>
+                </div>
+              </div>
+            </a>`;
+          swiperEl.appendChild(slide);
+        });
+        const swiper = new Swiper('#featured-swiper', {
+          slidesPerView: 1.2,
+          spaceBetween: 16,
+          breakpoints: { 640: { slidesPerView: 1.5 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 2.5 } },
+          navigation: { nextEl: '.swiper-button-next-static', prevEl: '.swiper-button-prev-static' }
+        });
+
+        // Build Projects Grid
+        const grid = $('#project-grid');
+        projects.forEach((p, idx) => {
+          const card = document.createElement('a');
+          card.href = p.repo; card.target = '_blank'; card.rel = 'noopener';
+          card.setAttribute('aria-label', `${p.title} — GitHub repository`);
+          card.className = 'group relative block rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden tilt';
+          card.setAttribute('data-tilt', '');
+          card.setAttribute('data-aos', 'fade-up');
+          card.setAttribute('data-aos-delay', String((idx%3)*50));
+          card.innerHTML = `
+              <div class="relative h-52">
+                <img src="${p.image}" alt="${p.title}" class="h-full w-full object-cover transition duration-300 group-hover:scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-gray-900/10 to-transparent"></div>
+                <div class="absolute top-3 right-3 inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-white/90 dark:bg-black/60 text-gray-900 dark:text-white">
+                  <i data-lucide="github" class="h-3.5 w-3.5"></i><span>Repo</span>
+                </div>
+              </div>
+              <div class="tilt-child p-5 bg-white/80 dark:bg-gray-950/80 backdrop-blur">
+                <h3 class="font-semibold">${p.title}</h3>
+                <div class="mt-2 flex flex-wrap gap-1.5">
+                  ${p.tags.map(t => `<span class='tag tag-light'>${t}</span>`).join('')}
+                </div>
+              </div>`;
+          grid.appendChild(card);
+        });
+
+        // Tilt effect
+        const tiltCards = $$('[data-tilt]');
+        tiltCards.forEach(card => {
+          card.addEventListener('mousemove', (e) => {
+            const r = card.getBoundingClientRect();
+            const x = e.clientX - r.left; const y = e.clientY - r.top;
+            const rx = ((y/r.height) - 0.5) * -6; // rotateX
+            const ry = ((x/r.width) - 0.5) * 6;  // rotateY
+            card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+          });
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(800px) rotateX(0) rotateY(0)';
+          });
+        });
+
+        // Active nav link on scroll
+        const sections = ['home','about','skills','projects','experience','contact'].map(id => ({ id, el: document.getElementById(id) }));
+        const navLinks = $$('header nav a[href^="#"]');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              navLinks.forEach(a => a.classList.remove('text-brand-500'));
+              const active = $$(`header nav a[href="#${entry.target.id}"]`);
+              active.forEach(a => a.classList.add('text-brand-500'));
+            }
+          });
+        }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
+        sections.forEach(s => s.el && obs.observe(s.el));
+
+        // Init locale at the very end so AOS/DOM are ready
+        initLocale();
+      });
+    </script>
+  </body>
+</html>
