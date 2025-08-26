@@ -1,3 +1,14 @@
+// ===== CV DOWNLOAD FUNCTIONALITY =====
+function updateCVButton() {
+  const cvButton = $('a[data-i18n="hero.btn_cv"]');
+  if (!cvButton) return;
+  
+  const currentLocale = localStorage.getItem('locale') || 'en';
+  const cvPath = currentLocale === 'pt' ? './assets/docs/curriculo.pdf' : './assets/docs/cv.pdf';
+  
+  cvButton.href = cvPath;
+}
+
 // ===== MAIN APPLICATION SCRIPT =====
 
 // DOM helpers
@@ -197,6 +208,17 @@ function initScrollSpy() {
   });
 }
 
+// ===== CV DOWNLOAD FUNCTIONALITY =====
+function updateCVButton() {
+  const cvButton = $('a[data-i18n="hero.btn_cv"]');
+  if (!cvButton) return;
+  
+  const currentLocale = localStorage.getItem('locale') || 'en';
+  const cvPath = currentLocale === 'pt' ? './assets/docs/curriculo.pdf' : './assets/docs/cv.pdf';
+  
+  cvButton.href = cvPath;
+}
+
 // Initialize all functionality when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   // Set current year in footer
@@ -245,4 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize internationalization (must be last)
   initLocale();
+  
+  // Update CV button after locale initialization
+  updateCVButton();
 });

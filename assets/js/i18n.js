@@ -156,6 +156,11 @@ function setLocale(locale) {
   const s2 = document.getElementById('langSelectMobile');
   if (s1) s1.value = locale === 'pt' ? 'pt' : 'en';
   if (s2) s2.value = locale === 'pt' ? 'pt' : 'en';
+  
+  // Update CV button link based on language
+  if (typeof updateCVButton === 'function') {
+    updateCVButton();
+  }
 }
 
 function initLocale() {
