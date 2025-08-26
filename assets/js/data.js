@@ -1,39 +1,12 @@
 // ===== PROJECT DATA =====
 const projectData = {
-  featured: [
-    {
-      title: 'RAG Chatbot — Institutional Docs',
-      blurb: 'Retrieval-Augmented Generation chatbot to query meeting minutes and admin docs (Postgres + Vector Search).',
-      image: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1400&auto=format&fit=crop',
-      repo: 'https://github.com/your-github/rag-unb-chatbot'
-    },
-    {
-      title: 'uGestor Mobile — RN + .NET',
-      blurb: 'React Native app integrated with .NET/C# backend. Solid contracts, error handling, and CI/CD.',
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop',
-      repo: 'https://github.com/your-github/ugestor-mobile'
-    },
-    {
-      title: 'Crypto Dashboard — Next.js',
-      blurb: 'Real-time crypto dashboard with user auth, charting, and API data pipelines.',
-      image: 'https://images.unsplash.com/photo-1640340434866-6e7030e1dd1f?q=80&w=1400&auto=format&fit=crop',
-      repo: 'https://github.com/your-github/crypto-dashboard'
-    },
-    {
-      title: 'Acessa UnB — Accessibility App',
-      blurb: 'Flutter mobile app for campus accessibility with Node.js backend and MySQL database.',
-      image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop',
-      repo: 'https://github.com/your-github/acessa-unb'
-    },
-    {
-      title: 'DNIT Schools Project',
-      blurb: 'Full-stack web solution for DNIT assisting schools near highways with .NET and React.',
-      image: 'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=1400&auto=format&fit=crop',
-      repo: 'https://github.com/your-github/dnit-schools'
-    }
-  ],
-
   projects: [
+    {
+      title: 'CryptoDash — Real-time Crypto Dashboard',
+      tags: ['React', 'Next.js', 'TypeScript', 'API'],
+      image: 'assets/images/cryptodash-img.png',
+      repo: 'https://github.com/ArturRSA19/Crypto-Dashboard'
+    },
     {
       title: 'Assistive Navigation App',
       tags: ['Flutter', 'Node', 'MySQL'],

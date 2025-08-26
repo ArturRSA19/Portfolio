@@ -1,7 +1,7 @@
 // ===== INTERNATIONALIZATION (i18n) =====
 const I18N = {
   en: {
-    'nav.about': 'About',
+    'nav.values': 'Values',
     'nav.skills': 'Skills',
     'nav.projects': 'Projects',
     'nav.experience': 'Experience',
@@ -10,17 +10,17 @@ const I18N = {
     'hero.tagline': 'Portfolio 2025',
     'hero.heading_pre': 'Hi, I\'m',
     'hero.heading_post': '.',
-    'hero.body': 'Full-Stack Developer passionate about building reliable, performant solutions. I work with <strong>C#/.NET</strong>, <strong>Java</strong>, <strong>React/Next.js</strong>, and <strong>React Native</strong>. Experienced in both legacy system maintenance and modern BI implementations, with expertise in mobile development and backend integrations.',
+    'hero.body': 'Full-Stack Developer passionate about building reliable, performant solutions. I work with <strong>C#/.NET</strong>, <strong>React/Next.js</strong>, <strong>React Native</strong>, <strong>Flutter</strong>, and <strong>TypeScript</strong>. Experienced in both legacy system maintenance and modern BI implementations, with extensive participation in academic projects including UnB accessibility extension projects, DNIT partnerships, and MEPA Energia collaborations.',
     'hero.btn_projects': 'View Projects',
     'hero.btn_github': 'GitHub',
     'hero.btn_cv': 'Download CV',
     
-    'about.title': 'About',
-    'about.body': 'I\'m a Software Engineering student at the University of Brasília and a Full-Stack developer with experience in both modern and legacy systems. Currently working with <strong>C# MVC</strong> and <strong>Java JPA</strong> at UGestor, I\'ve developed everything from <strong>React Native</strong> mobile apps to <strong>BI systems</strong>. My expertise spans frontend development, backend APIs, and database management, with a passion for clean code and scalable architecture.',
-    'about.stats.years': 'Years coding',
-    'about.stats.shipped': 'Projects shipped',
-    'about.stats.stacks': 'Main stacks',
-    'about.stats.userfocused': 'User-focused',
+    'values.title': 'My Development Philosophy',
+    'values.body': 'I believe in building software that makes a real difference. My approach focuses on <strong>accessibility-first design</strong>, ensuring everyone can use what I create. I prioritize <strong>clean, maintainable code</strong> over quick fixes, practice <strong>continuous learning</strong> to stay current with technology, and value <strong>collaborative development</strong> through clear documentation and knowledge sharing. Every project is an opportunity to create something meaningful and lasting.',
+    'values.stats.years': 'Years coding',
+    'values.stats.shipped': 'Projects shipped',
+    'values.stats.stacks': 'Main stacks',
+    'values.stats.userfocused': 'User-focused',
     
     'skills.title': 'Skills',
     'skills.frontend': 'Frontend',
@@ -30,7 +30,6 @@ const I18N = {
     'skills.devops': 'DevOps & QA',
     'skills.a11y': 'Accessibility (WCAG)',
     
-    'featured.title': 'Featured',
     'projects.title': 'Projects',
     'projects.see_all': 'See all →',
     
@@ -68,7 +67,7 @@ const I18N = {
     'footer.back_to_top': 'Back to top'
   },
   pt: {
-    'nav.about': 'Sobre',
+    'nav.values': 'Valores',
     'nav.skills': 'Competências',
     'nav.projects': 'Projetos',
     'nav.experience': 'Experiência',
@@ -77,17 +76,17 @@ const I18N = {
     'hero.tagline': 'Portfólio 2025',
     'hero.heading_pre': 'Olá, me chamo',
     'hero.heading_post': '.',
-    'hero.body': 'Desenvolvedor Full-Stack apaixonado por construir soluções confiáveis e performáticas. Trabalho com <strong>C#/.NET</strong>, <strong>Java</strong>, <strong>React/Next.js</strong> e <strong>React Native</strong>. Experiente tanto na manutenção de sistemas legados quanto na implementação de BI moderno, com expertise em desenvolvimento mobile e integrações backend.',
+    'hero.body': 'Desenvolvedor Full-Stack apaixonado por construir soluções confiáveis e performáticas. Trabalho com <strong>C#/.NET</strong>, <strong>React/Next.js</strong>, <strong>React Native</strong>, <strong>Flutter</strong> e <strong>TypeScript</strong>. Experiente tanto na manutenção de sistemas legados quanto na implementação de BI moderno, com ampla participação em projetos acadêmicos incluindo extensão de acessibilidade da UnB, parcerias com DNIT e colaborações com MEPA Energia.',
     'hero.btn_projects': 'Ver Projetos',
     'hero.btn_github': 'GitHub',
     'hero.btn_cv': 'Baixar CV',
     
-    'about.title': 'Sobre',
-    'about.body': 'Sou estudante de Engenharia de Software na Universidade de Brasília e desenvolvedor Full-Stack com experiência em sistemas modernos e legados. Atualmente trabalhando com <strong>C# MVC</strong> e <strong>Java JPA</strong> na UGestor, já desenvolvi desde apps <strong>React Native</strong> até <strong>sistemas BI</strong>. Minha expertise abrange desenvolvimento frontend, APIs backend e gerenciamento de banco de dados, com paixão por código limpo e arquitetura escalável.',
-    'about.stats.years': 'Anos programando',
-    'about.stats.shipped': 'Projetos entregues',
-    'about.stats.stacks': 'Stacks principais',
-    'about.stats.userfocused': 'Foco no usuário',
+    'values.title': 'Minha Filosofia de Desenvolvimento',
+    'values.body': 'Acredito em construir software que faça uma diferença real. Minha abordagem foca no <strong>design acessível em primeiro lugar</strong>, garantindo que todos possam usar o que eu crio. Priorizo <strong>código limpo e sustentável</strong> ao invés de soluções rápidas, pratico <strong>aprendizado contínuo</strong> para me manter atualizado com a tecnologia, e valorizo <strong>desenvolvimento colaborativo</strong> através de documentação clara e compartilhamento de conhecimento. Cada projeto é uma oportunidade de criar algo significativo e duradouro.',
+    'values.stats.years': 'Anos programando',
+    'values.stats.shipped': 'Projetos entregues',
+    'values.stats.stacks': 'Stacks principais',
+    'values.stats.userfocused': 'Foco no usuário',
     
     'skills.title': 'Competências',
     'skills.frontend': 'Frontend',
