@@ -17,11 +17,123 @@ html, body {
 /* 3D Tilt effect */
 .tilt { 
   transform-style: preserve-3d; 
-  transition: transform 0.2s ease; 
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+  will-change: transform;
 }
 
 .tilt:hover .tilt-child { 
   transform: translateZ(16px); 
+}
+
+/* Project card specific styles */
+.project-card {
+  transform-style: preserve-3d;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  border-radius: 1rem !important;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-card .project-image {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, filter;
+  border-radius: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  height: 240px;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05);
+  filter: brightness(1.1) saturate(1.1);
+}
+
+.project-card .project-content {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  border-radius: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.project-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid;
+}
+
+.project-btn-primary {
+  background: rgb(15, 194, 192);
+  color: white;
+  border-color: rgb(15, 194, 192);
+}
+
+.project-btn-primary:hover {
+  background: rgb(13, 174, 172);
+  border-color: rgb(13, 174, 172);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 194, 192, 0.3);
+}
+
+.project-btn-secondary {
+  background: transparent;
+  color: rgb(107, 114, 128);
+  border-color: rgb(209, 213, 219);
+}
+
+.dark .project-btn-secondary {
+  color: rgb(156, 163, 175);
+  border-color: rgb(75, 85, 99);
+}
+
+.project-btn-secondary:hover {
+  color: rgb(15, 194, 192);
+  border-color: rgb(15, 194, 192);
+  transform: translateY(-1px);
+}
+
+.project-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Prevent any border-radius inheritance issues */
+.project-card * {
+  box-sizing: border-box;
 }
 
 /* Glass morphism */

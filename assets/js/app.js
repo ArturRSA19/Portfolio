@@ -33,29 +33,58 @@ function buildProjectsGrid() {
   if (!grid || !projectData.projects) return;
   
   projectData.projects.forEach((project, idx) => {
-    const card = document.createElement('a');
-    card.href = project.repo;
-    card.target = '_blank';
-    card.rel = 'noopener';
-    card.setAttribute('aria-label', `${project.title} — GitHub repository`);
-    card.className = 'group relative block rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden tilt';
+    const card = document.createElement('div');
+    card.className = 'group relative project-card border border-gray-200 dark:border-gray-800';
     card.setAttribute('data-tilt', '');
     card.setAttribute('data-aos', 'fade-up');
-    card.setAttribute('data-aos-delay', String((idx % 3) * 50));
+    card.setAttribute('data-aos-delay', String((idx % 3) * 100));
+    
+    // Create buttons HTML
+    const hasLiveUrl = project.liveUrl && project.liveUrl.trim() !== '';
+    const buttonsHTML = `
+      <div class="project-actions">
+        <a href="${project.repo}" 
+           target="_blank" 
+           rel="noopener" 
+           class="project-btn project-btn-primary"
+           aria-label="View ${project.title} source code">
+          <i data-lucide="github" class="h-4 w-4"></i>
+          <span data-i18n="projects.source_code">Source Code</span>
+        </a>
+        ${hasLiveUrl ? `
+          <a href="${project.liveUrl}" 
+             target="_blank" 
+             rel="noopener" 
+             class="project-btn project-btn-secondary"
+             aria-label="View ${project.title} live demo">
+            <i data-lucide="external-link" class="h-4 w-4"></i>
+            <span data-i18n="projects.see_live">See Live</span>
+          </a>
+        ` : `
+          <button class="project-btn project-btn-secondary" 
+                  disabled 
+                  title="Live demo not available">
+            <i data-lucide="external-link" class="h-4 w-4"></i>
+            <span data-i18n="projects.see_live">See Live</span>
+          </button>
+        `}
+      </div>
+    `;
     
     card.innerHTML = `
-      <div class="relative h-52">
-        <img src="${project.image}" alt="${project.title}" class="h-full w-full object-cover transition duration-300 group-hover:scale-105" />
+      <div class="relative">
+        <img src="${project.image}" 
+             alt="${project.title}" 
+             class="w-full object-cover project-image" 
+             loading="lazy" />
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-gray-900/10 to-transparent"></div>
-        <div class="absolute top-3 right-3 inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-white/90 dark:bg-black/60 text-gray-900 dark:text-white">
-          <i data-lucide="github" class="h-3.5 w-3.5"></i><span>Repo</span>
-        </div>
       </div>
-      <div class="tilt-child p-5 bg-white/80 dark:bg-gray-950/80 backdrop-blur">
-        <h3 class="font-semibold">${project.title}</h3>
-        <div class="mt-2 flex flex-wrap gap-1.5">
+      <div class="project-content p-6 bg-white/80 dark:bg-gray-950/80 backdrop-blur">
+        <h3 class="font-semibold text-lg mb-3">${project.title}</h3>
+        <div class="flex flex-wrap gap-1.5 mb-4">
           ${project.tags.map(tag => `<span class='tag tag-light'>${tag}</span>`).join('')}
         </div>
+        ${buttonsHTML}
       </div>`;
     
     grid.appendChild(card);
@@ -67,17 +96,30 @@ function initTiltEffect() {
   const tiltCards = $$('[data-tilt]');
   
   tiltCards.forEach(card => {
+    // Reset any existing transforms on initialization
+    card.style.transform = '';
+    
+    card.addEventListener('mouseenter', () => {
+      card.style.willChange = 'transform';
+    });
+    
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      const rotateX = ((y / rect.height) - 0.5) * -6;
-      const rotateY = ((x / rect.width) - 0.5) * 6;
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      const rotateX = ((y / rect.height) - 0.5) * -8;
+      const rotateY = ((x / rect.width) - 0.5) * 8;
+      
+      requestAnimationFrame(() => {
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
+      });
     });
     
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(800px) rotateX(0) rotateY(0)';
+      requestAnimationFrame(() => {
+        card.style.transform = '';
+        card.style.willChange = 'auto';
+      });
     });
   });
 }
@@ -144,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize interactive effects
   initTiltEffect();
   initScrollSpy();
-  initProfileImageEffect();
 
   // Initialize internationalization (must be last)
   initLocale();

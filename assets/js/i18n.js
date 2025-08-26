@@ -32,6 +32,8 @@ const I18N = {
     
     'projects.title': 'Projects',
     'projects.see_all': 'See all →',
+    'projects.source_code': 'Source Code',
+    'projects.see_live': 'See Live',
     
     'experience.title': 'Experience',
     'experience.current': 'Currently',
@@ -99,6 +101,8 @@ const I18N = {
     'featured.title': 'Destaques',
     'projects.title': 'Projetos',
     'projects.see_all': 'Ver todos →',
+    'projects.source_code': 'Código Fonte',
+    'projects.see_live': 'Ver Online',
     
     'experience.title': 'Experiência',
     'experience.current': 'Atualmente',
