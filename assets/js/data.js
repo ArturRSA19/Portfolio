@@ -26,5 +26,11 @@ const projectData = {
       image: 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?q=80&w=1200&auto=format&fit=crop',
       repo: 'https://github.com/your-github/jetson-xavier-nx-review'
     },
+    {
+      title: 'NLW Spacetime — Time Capsule App',
+      tags: ['React Native', 'TypeScript', 'Node.js', 'Prisma'],
+      image: 'assets/images/spacetimeApp.jpg',
+      repo: 'https://github.com/ArturRSA19/NLW-Spacetime',
+    }
   ]
 };
