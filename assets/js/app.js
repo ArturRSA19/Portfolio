@@ -160,6 +160,69 @@ function applyTiltEffect(card, index) {
   console.log(`Tilt effect successfully applied to card ${index + 1}`); // Debug log
 }
 
+// Apply tilt effect to profile image
+function applyProfileTiltEffect() {
+  const profileContainer = $('.profile-container');
+  if (!profileContainer) return;
+  
+  console.log('Applying tilt effect to profile image');
+  
+  // Reset any existing transforms
+  profileContainer.style.transform = '';
+  profileContainer.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+  
+  let isHovering = false;
+  
+  const handleMouseEnter = () => {
+    isHovering = true;
+    profileContainer.style.willChange = 'transform';
+    profileContainer.style.transition = 'none';
+    console.log('Mouse entered profile image');
+  };
+  
+  const handleMouseMove = (e) => {
+    if (!isHovering) return;
+    
+    const rect = profileContainer.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Calculate rotation values (same as project cards)
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -4;
+    const rotateY = ((x - centerX) / centerX) * 4;
+    
+    requestAnimationFrame(() => {
+      if (isHovering) {
+        profileContainer.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
+      }
+    });
+  };
+  
+  const handleMouseLeave = () => {
+    isHovering = false;
+    profileContainer.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    requestAnimationFrame(() => {
+      profileContainer.style.transform = '';
+      profileContainer.style.willChange = 'auto';
+    });
+    console.log('Mouse left profile image');
+  };
+  
+  // Remove any existing listeners first
+  profileContainer.removeEventListener('mouseenter', handleMouseEnter);
+  profileContainer.removeEventListener('mousemove', handleMouseMove);
+  profileContainer.removeEventListener('mouseleave', handleMouseLeave);
+  
+  // Add new listeners
+  profileContainer.addEventListener('mouseenter', handleMouseEnter);
+  profileContainer.addEventListener('mousemove', handleMouseMove);
+  profileContainer.addEventListener('mouseleave', handleMouseLeave);
+  
+  console.log('Tilt effect successfully applied to profile image');
+}
+
 // Verify that all project cards have tilt effect
 function verifyTiltEffects() {
   const allCards = $$('.project-card');
@@ -254,6 +317,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Build dynamic content
   buildProjectsGrid();
   
+  // Apply tilt effect to profile image
+  applyProfileTiltEffect();
+  
   // Verify all cards have tilt effect after a short delay
   setTimeout(() => {
     verifyTiltEffects();
@@ -270,4 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Update CV button after locale initialization
   updateCVButton();
+
+  // Apply tilt effect to profile image
+  applyProfileTiltEffect();
 });

@@ -286,13 +286,21 @@ select:focus {
   transform: scale(1.05) rotateY(5deg) rotateX(5deg);
 }
 
+/* Profile image container and effects */
+.profile-container {
+  transform-style: preserve-3d;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  cursor: pointer;
+}
+
 .profile-image {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   filter: brightness(1) contrast(1) saturate(1);
 }
 
 .profile-container:hover .profile-image {
-  filter: brightness(1.1) contrast(1.1) saturate(1.2);
+  filter: brightness(1) contrast(1) saturate(1);
   transform: translateZ(20px);
 }
 
