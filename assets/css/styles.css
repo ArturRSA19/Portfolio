@@ -395,6 +395,68 @@ select:focus {
   transform: translateX(100%) translateY(100%) rotate(45deg);
 }
 
+/* Hero section button styles with fill effect */
+.hero-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-btn > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.hero-btn-outline {
+  background: transparent;
+  color: rgb(107, 114, 128);
+  border-color: rgb(209, 213, 219);
+}
+
+.dark .hero-btn-outline {
+  color: rgb(156, 163, 175);
+  border-color: rgb(75, 85, 99);
+}
+
+.hero-btn-outline::before {
+  background: rgb(15, 194, 192);
+}
+
+.hero-btn-outline:hover::before {
+  left: 0;
+}
+
+.hero-btn-outline:hover {
+  color: white;
+  border-color: rgb(15, 194, 192);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(15, 194, 192, 0.3);
+}
+
+.dark .hero-btn-outline:hover {
+  color: rgb(17, 24, 39);
+}
+
 /* Print styles */
 @media print {
   .no-print {

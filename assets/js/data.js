@@ -23,8 +23,8 @@ const projectData = {
     {
       title: 'Jetson Xavier NX — Docs',
       tags: ['Docs', 'Embedded', 'Research'],
-      image: 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?q=80&w=1200&auto=format&fit=crop',
-      repo: 'https://github.com/your-github/jetson-xavier-nx-review'
+      image: 'assets/images/jetson.jpg',
+      repo: 'https://gitlab.com/ArturRSA19/trabalho-1-2025-1-jetson-xavier-nx/-/tree/main/JetsonXavierNX'
     },
     {
       title: 'NLW Spacetime — Time Capsule App',
