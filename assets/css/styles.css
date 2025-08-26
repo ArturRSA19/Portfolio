@@ -28,8 +28,6 @@ html, body {
 /* Project card specific styles */
 .project-card {
   transform-style: preserve-3d;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
   border-radius: 1rem !important;
   overflow: hidden;
   backface-visibility: hidden;
@@ -37,6 +35,7 @@ html, body {
   display: block;
   text-decoration: none;
   color: inherit;
+  position: relative;
 }
 
 .project-card:hover {
@@ -80,32 +79,66 @@ html, body {
   display: flex;
   gap: 0.75rem;
   margin-top: 1rem;
+  align-items: center;
 }
 
 .project-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.2s ease;
-  border: 1px solid;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+  min-width: 140px;
+}
+
+.project-btn > * {
+  position: relative;
+  z-index: 2;
+}
+
+.project-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
 }
 
 .project-btn-primary {
-  background: rgb(15, 194, 192);
-  color: white;
+  background: transparent;
+  color: rgb(15, 194, 192);
   border-color: rgb(15, 194, 192);
 }
 
+.project-btn-primary::before {
+  background: rgb(15, 194, 192);
+}
+
+.project-btn-primary:hover::before {
+  left: 0;
+}
+
 .project-btn-primary:hover {
-  background: rgb(13, 174, 172);
-  border-color: rgb(13, 174, 172);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(15, 194, 192, 0.3);
+  color: white;
+  border-color: rgb(15, 194, 192);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(15, 194, 192, 0.3);
+}
+
+.dark .project-btn-primary:hover {
+  color: rgb(17, 24, 39);
 }
 
 .project-btn-secondary {
@@ -122,13 +155,25 @@ html, body {
 .project-btn-secondary:hover {
   color: rgb(15, 194, 192);
   border-color: rgb(15, 194, 192);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 194, 192, 0.2);
 }
 
 .project-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none !important;
+  box-shadow: none !important;
+}
+
+.project-btn:disabled:hover {
+  color: rgb(107, 114, 128);
+  border-color: rgb(209, 213, 219);
+}
+
+.dark .project-btn:disabled:hover {
+  color: rgb(156, 163, 175);
+  border-color: rgb(75, 85, 99);
 }
 
 /* Prevent any border-radius inheritance issues */

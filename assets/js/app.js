@@ -32,10 +32,14 @@ function buildProjectsGrid() {
   const grid = $('#project-grid');
   if (!grid || !projectData.projects) return;
   
+  // Clear existing content
+  grid.innerHTML = '';
+  
   projectData.projects.forEach((project, idx) => {
     const card = document.createElement('div');
     card.className = 'group relative project-card border border-gray-200 dark:border-gray-800';
-    card.setAttribute('data-tilt', '');
+    // Add unique identifier for debugging
+    card.setAttribute('data-project-index', idx);
     card.setAttribute('data-aos', 'fade-up');
     card.setAttribute('data-aos-delay', String((idx % 3) * 100));
     
@@ -48,7 +52,6 @@ function buildProjectsGrid() {
            rel="noopener" 
            class="project-btn project-btn-primary"
            aria-label="View ${project.title} source code">
-          <i data-lucide="github" class="h-4 w-4"></i>
           <span data-i18n="projects.source_code">Source Code</span>
         </a>
         ${hasLiveUrl ? `
@@ -57,17 +60,9 @@ function buildProjectsGrid() {
              rel="noopener" 
              class="project-btn project-btn-secondary"
              aria-label="View ${project.title} live demo">
-            <i data-lucide="external-link" class="h-4 w-4"></i>
             <span data-i18n="projects.see_live">See Live</span>
           </a>
-        ` : `
-          <button class="project-btn project-btn-secondary" 
-                  disabled 
-                  title="Live demo not available">
-            <i data-lucide="external-link" class="h-4 w-4"></i>
-            <span data-i18n="projects.see_live">See Live</span>
-          </button>
-        `}
+        ` : ''}
       </div>
     `;
     
@@ -87,41 +82,95 @@ function buildProjectsGrid() {
         ${buttonsHTML}
       </div>`;
     
+    // Apply tilt effect directly to each card as it's created
+    applyTiltEffect(card, idx);
+    
     grid.appendChild(card);
   });
 }
 
-// 3D Tilt effect for project cards
-function initTiltEffect() {
-  const tiltCards = $$('[data-tilt]');
+// Apply 3D Tilt effect to individual card
+function applyTiltEffect(card, index) {
+  console.log(`Applying tilt effect to card ${index + 1}`); // Debug log
   
-  tiltCards.forEach(card => {
-    // Reset any existing transforms on initialization
-    card.style.transform = '';
+  // Reset any existing transforms
+  card.style.transform = '';
+  card.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+  
+  let isHovering = false;
+  
+  const handleMouseEnter = () => {
+    isHovering = true;
+    card.style.willChange = 'transform';
+    card.style.transition = 'none';
+    console.log(`Mouse entered card ${index + 1}`); // Debug log
+  };
+  
+  const handleMouseMove = (e) => {
+    if (!isHovering) return;
     
-    card.addEventListener('mouseenter', () => {
-      card.style.willChange = 'transform';
-    });
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const rotateX = ((y / rect.height) - 0.5) * -8;
-      const rotateY = ((x / rect.width) - 0.5) * 8;
-      
-      requestAnimationFrame(() => {
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
-      });
-    });
+    // Calculate rotation values (reduced for subtle effect)
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -4;
+    const rotateY = ((x - centerX) / centerX) * 4;
     
-    card.addEventListener('mouseleave', () => {
-      requestAnimationFrame(() => {
-        card.style.transform = '';
-        card.style.willChange = 'auto';
-      });
+    requestAnimationFrame(() => {
+      if (isHovering) {
+        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
+      }
     });
+  };
+  
+  const handleMouseLeave = () => {
+    isHovering = false;
+    card.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    requestAnimationFrame(() => {
+      card.style.transform = '';
+      card.style.willChange = 'auto';
+    });
+    console.log(`Mouse left card ${index + 1}`); // Debug log
+  };
+  
+  // Remove any existing listeners first
+  card.removeEventListener('mouseenter', handleMouseEnter);
+  card.removeEventListener('mousemove', handleMouseMove);
+  card.removeEventListener('mouseleave', handleMouseLeave);
+  
+  // Add new listeners
+  card.addEventListener('mouseenter', handleMouseEnter);
+  card.addEventListener('mousemove', handleMouseMove);
+  card.addEventListener('mouseleave', handleMouseLeave);
+  
+  console.log(`Tilt effect successfully applied to card ${index + 1}`); // Debug log
+}
+
+// Verify that all project cards have tilt effect
+function verifyTiltEffects() {
+  const allCards = $$('.project-card');
+  console.log(`Verifying tilt effects for ${allCards.length} cards`);
+  
+  allCards.forEach((card, index) => {
+    const hasMouseEnterListener = card.onmouseenter !== null;
+    const projectIndex = card.getAttribute('data-project-index');
+    
+    console.log(`Card ${index + 1} (project ${projectIndex}): ${hasMouseEnterListener ? 'HAS' : 'MISSING'} tilt effect`);
+    
+    // If missing, apply the effect
+    if (!hasMouseEnterListener) {
+      console.log(`Reapplying tilt effect to card ${index + 1}`);
+      applyTiltEffect(card, index);
+    }
   });
+}
+
+// Legacy function - kept for compatibility but now unused
+function initTiltEffect() {
+  console.log('Legacy initTiltEffect called - this should not happen with new implementation');
 }
 
 // Active navigation link on scroll
@@ -182,10 +231,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Build dynamic content
   buildProjectsGrid();
+  
+  // Verify all cards have tilt effect after a short delay
+  setTimeout(() => {
+    verifyTiltEffects();
+  }, 200);
 
   // Initialize interactive effects
-  initTiltEffect();
   initScrollSpy();
+
+  // Verify tilt effects
+  verifyTiltEffects();
 
   // Initialize internationalization (must be last)
   initLocale();
