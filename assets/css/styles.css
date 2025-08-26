@@ -118,6 +118,118 @@ select:focus {
   cursor: not-allowed !important;
 }
 
+/* Profile Image Effects */
+.profile-container {
+  position: relative;
+  perspective: 1000px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-container:hover {
+  transform: scale(1.05) rotateY(5deg) rotateX(5deg);
+}
+
+.profile-image {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(1) contrast(1) saturate(1);
+}
+
+.profile-container:hover .profile-image {
+  filter: brightness(1.1) contrast(1.1) saturate(1.2);
+  transform: translateZ(20px);
+}
+
+.profile-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.5rem;
+  background: linear-gradient(45deg, 
+    rgba(15, 194, 192, 0.6), 
+    rgba(59, 130, 246, 0.6), 
+    rgba(147, 51, 234, 0.6), 
+    rgba(236, 72, 153, 0.6));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: blur(20px);
+  z-index: -1;
+}
+
+.profile-container:hover .profile-glow {
+  opacity: 1;
+}
+
+.profile-sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.profile-container:hover .profile-sparkle {
+  opacity: 1;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+.profile-sparkle:nth-child(1) {
+  top: 20%;
+  left: 80%;
+  animation-delay: 0s;
+}
+
+.profile-sparkle:nth-child(2) {
+  top: 60%;
+  left: 90%;
+  animation-delay: 0.5s;
+}
+
+.profile-sparkle:nth-child(3) {
+  top: 80%;
+  left: 20%;
+  animation-delay: 1s;
+}
+
+.profile-sparkle:nth-child(4) {
+  top: 30%;
+  left: 10%;
+  animation-delay: 1.5s;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+.profile-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.profile-container:hover .profile-shine {
+  transform: translateX(100%) translateY(100%) rotate(45deg);
+}
+
 /* Print styles */
 @media print {
   .no-print {

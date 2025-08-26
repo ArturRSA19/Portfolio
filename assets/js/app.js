@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize interactive effects
   initTiltEffect();
   initScrollSpy();
+  initProfileImageEffect();
 
   // Initialize internationalization (must be last)
   initLocale();

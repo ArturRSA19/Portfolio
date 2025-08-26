@@ -2,6 +2,12 @@
 const projectData = {
   projects: [
     {
+      title: 'Orders App — Order Management System',
+      tags: ['React', 'Node.js', 'MongoDB', 'Express'],
+      image: 'assets/images/ordersApp.jpg',
+      repo: 'https://github.com/ArturRSA19/Orders-App'
+    },
+    {
       title: 'CryptoDash — Real-time Crypto Dashboard',
       tags: ['React', 'Next.js', 'TypeScript', 'API'],
       image: 'assets/images/cryptodash-img.png',
