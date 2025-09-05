@@ -305,6 +305,9 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#langSelect')?.addEventListener('change', (e) => setLocale(e.target.value));
   $('#langSelectMobile')?.addEventListener('change', (e) => setLocale(e.target.value));
 
+  // Initialize certificates navigation
+  initCertificatesNavigation();
+
   // Initialize AOS (Animate on Scroll)
   if (window.AOS) {
     AOS.init({
@@ -340,3 +343,69 @@ document.addEventListener('DOMContentLoaded', () => {
   // Apply tilt effect to profile image
   applyProfileTiltEffect();
 });
+
+// Initialize certificates navigation
+function initCertificatesNavigation() {
+  // Handle certificates link clicks
+  const certificatesLinks = $$('a[href="#certificates"]');
+  certificatesLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      showCertificatesSection();
+    });
+  });
+
+  // Handle back to portfolio button
+  const backButton = $('#backToPortfolio');
+  if (backButton) {
+    backButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      hideCertificatesSection();
+    });
+  }
+
+  // Handle home link clicks (both normal and when in certificates mode)
+  const homeLinks = $$('a[href="#home"]');
+  homeLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Check if we're in certificates mode
+      const certificatesSection = $('#certificates');
+      const isInCertificatesMode = certificatesSection && !certificatesSection.classList.contains('hidden');
+      
+      if (isInCertificatesMode) {
+        hideCertificatesSection();
+      } else {
+        // Normal scroll to home
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Handle mobile menu links
+  $('#mobileMenu')?.addEventListener('click', (e) => {
+    if (e.target.matches('a[href="#certificates"]')) {
+      e.preventDefault();
+      showCertificatesSection();
+      // Close mobile menu
+      $('#mobileMenu').classList.add('hidden');
+    } else if (e.target.matches('a[href="#home"]')) {
+      e.preventDefault();
+      
+      // Check if we're in certificates mode
+      const certificatesSection = $('#certificates');
+      const isInCertificatesMode = certificatesSection && !certificatesSection.classList.contains('hidden');
+      
+      if (isInCertificatesMode) {
+        hideCertificatesSection();
+      } else {
+        // Normal scroll to home
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      
+      // Close mobile menu
+      $('#mobileMenu').classList.add('hidden');
+    }
+  });
+}

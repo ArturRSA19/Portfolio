@@ -1,10 +1,12 @@
 // ===== INTERNATIONALIZATION (i18n) =====
 const I18N = {
   en: {
+    'nav.home': 'Home',
     'nav.values': 'Values',
     'nav.skills': 'Skills',
     'nav.projects': 'Projects',
     'nav.experience': 'Experience',
+    'nav.certificates': 'Certificates',
     'nav.contact': 'Contact',
     
     'hero.tagline': 'Portfolio 2025',
@@ -58,6 +60,11 @@ const I18N = {
     'experience.dnit.b1': 'Developed web solutions for DNIT project assisting schools near highways.',
     'experience.dnit.b2': 'Used .NET, C#, React, TypeScript, PostgreSQL with Figma for design.',
     
+    'certificates.title': 'Certificates',
+    'certificates.subtitle': 'Professional certifications and achievements',
+    'certificates.view': 'View Certificate',
+    'certificates.back': 'Back to Portfolio',
+    
     'contact.title': 'Contact',
     'contact.subtitle': 'Open to internships, junior roles, and freelance work. Let\'s build something great.',
     'contact.email': 'Email',
@@ -69,10 +76,12 @@ const I18N = {
     'footer.back_to_top': 'Back to top'
   },
   pt: {
+    'nav.home': 'Início',
     'nav.values': 'Valores',
     'nav.skills': 'Competências',
     'nav.projects': 'Projetos',
     'nav.experience': 'Experiência',
+    'nav.certificates': 'Certificados',
     'nav.contact': 'Contato',
     
     'hero.tagline': 'Portfólio 2025',
@@ -127,6 +136,11 @@ const I18N = {
     'experience.dnit.b1': 'Desenvolvi soluções web para projeto DNIT de assistência a escolas próximas a rodovias.',
     'experience.dnit.b2': 'Utilizei .NET, C#, React, TypeScript, PostgreSQL com Figma para design.',
     
+    'certificates.title': 'Certificados',
+    'certificates.subtitle': 'Certificações profissionais e conquistas',
+    'certificates.view': 'Ver Certificado',
+    'certificates.back': 'Voltar ao Portfólio',
+    
     'contact.title': 'Contato',
     'contact.subtitle': 'Aberto a estágio, vagas júnior e freela. Vamos construir algo incrível.',
     'contact.email': 'Email',
@@ -160,6 +174,11 @@ function setLocale(locale) {
   // Update CV button link based on language
   if (typeof updateCVButton === 'function') {
     updateCVButton();
+  }
+  
+  // Update certificates content if certificates section is visible
+  if (typeof refreshCertificatesContent === 'function') {
+    refreshCertificatesContent();
   }
 }
 

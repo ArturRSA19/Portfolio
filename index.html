@@ -75,6 +75,8 @@
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="#home" class="font-black tracking-tight text-xl md:text-2xl">AR<span class="text-brand-500">.</span></a>
           <div class="hidden md:flex items-center gap-4 text-sm font-medium">
+            <a href="#certificates" class="certificates-nav-link hover:text-brand-500 font-semibold text-brand-500 border-b-2 border-brand-500 pb-1" data-i18n="nav.certificates">Certificates</a>
+            <a href="#home" class="hover:text-brand-500" data-i18n="nav.home">Home</a>
             <a href="#values" class="hover:text-brand-500" data-i18n="nav.values">Values</a>
             <a href="#skills" class="hover:text-brand-500" data-i18n="nav.skills">Skills</a>
             <a href="#projects" class="hover:text-brand-500" data-i18n="nav.projects">Projects</a>
@@ -103,6 +105,8 @@
         <!-- Mobile menu -->
         <div id="mobileMenu" class="hidden px-6 pb-6 md:hidden">
           <div class="flex flex-col gap-3 text-sm">
+            <a href="#certificates" class="py-2 font-semibold text-brand-500" data-i18n="nav.certificates">Certificates</a>
+            <a href="#home" class="py-2" data-i18n="nav.home">Home</a>
             <a href="#values" class="py-2" data-i18n="nav.values">Values</a>
             <a href="#skills" class="py-2" data-i18n="nav.skills">Skills</a>
             <a href="#projects" class="py-2" data-i18n="nav.projects">Projects</a>
@@ -319,6 +323,24 @@
       </div>
     </section>
 
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20 border-t border-gray-100 dark:border-gray-900 hidden">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-12" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold" data-i18n="certificates.title">Certificates</h2>
+          <p class="mt-4 text-gray-600 dark:text-gray-300" data-i18n="certificates.subtitle">Professional certifications and achievements</p>
+          <button id="backToPortfolio" class="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-500 transition">
+            <i data-lucide="arrow-left" class="h-4 w-4"></i>
+            <span data-i18n="certificates.back">Back to Portfolio</span>
+          </button>
+        </div>
+        
+        <div id="certificatesGrid" class="space-y-8">
+          <!-- Certificates will be loaded dynamically here -->
+        </div>
+      </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-20 border-t border-gray-100 dark:border-gray-900">
       <div class="max-w-5xl mx-auto px-6">
@@ -363,6 +385,7 @@
 
     <!-- Application Scripts -->
     <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/certificates.js"></script>
     <script src="./assets/js/i18n.js"></script>
     <script src="./assets/js/app.js"></script>
   </body>
