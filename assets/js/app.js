@@ -342,6 +342,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Apply tilt effect to profile image
   applyProfileTiltEffect();
+  
+  // Initialize back to top button
+  initBackToTop();
 });
 
 // Initialize certificates navigation
@@ -408,4 +411,41 @@ function initCertificatesNavigation() {
       $('#mobileMenu').classList.add('hidden');
     }
   });
+}
+
+// Back to Top Button functionality
+function initBackToTop() {
+  const backToTopBtn = $('#backToTop');
+  if (!backToTopBtn) return;
+
+  // Show/hide button based on scroll position
+  const toggleBackToTopButton = () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
+  };
+
+  // Smooth scroll to top
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // Listen to scroll events with throttling for better performance
+  let scrollTimeout;
+  window.addEventListener('scroll', () => {
+    if (scrollTimeout) {
+      window.cancelAnimationFrame(scrollTimeout);
+    }
+    scrollTimeout = window.requestAnimationFrame(() => {
+      toggleBackToTopButton();
+    });
+  });
+
+  // Initial check
+  toggleBackToTopButton();
 }
