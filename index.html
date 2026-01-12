@@ -82,12 +82,15 @@
             <a href="#projects" class="hover:text-brand-500" data-i18n="nav.projects">Projects</a>
             <a href="#experience" class="hover:text-brand-500" data-i18n="nav.experience">Experience</a>
             <a href="#contact" class="hover:text-brand-500" data-i18n="nav.contact">Contact</a>
-            <div class="inline-flex items-center gap-2">
-              <label for="langSelect" class="sr-only">Language</label>
-              <select id="langSelect" class="px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 appearance-none">
-                <option value="en">EN</option>
-                <option value="pt">PT</option>
-              </select>
+            <div class="relative inline-flex items-center">
+              <div class="inline-flex items-center gap-1 p-1 rounded-lg border border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
+                <button id="langBtnEn" class="lang-btn px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200" data-lang="en">
+                  EN
+                </button>
+                <button id="langBtnPt" class="lang-btn px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200" data-lang="pt">
+                  PT
+                </button>
+              </div>
             </div>
             <button id="themeToggle" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-brand-500 dark:hover:border-brand-500 transition">
               <i data-lucide="sun" class="h-4 w-4 hidden dark:inline"></i>
@@ -113,10 +116,14 @@
             <a href="#experience" class="py-2" data-i18n="nav.experience">Experience</a>
             <a href="#contact" class="py-2" data-i18n="nav.contact">Contact</a>
             <div class="flex items-center gap-2">
-              <select id="langSelectMobile" class="px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 appearance-none">
-                <option value="en">EN</option>
-                <option value="pt">PT</option>
-              </select>
+              <div class="inline-flex items-center gap-1 p-1 rounded-lg border border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
+                <button id="langBtnEnMobile" class="lang-btn-mobile px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200" data-lang="en">
+                  EN
+                </button>
+                <button id="langBtnPtMobile" class="lang-btn-mobile px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200" data-lang="pt">
+                  PT
+                </button>
+              </div>
               <button id="themeToggleMobile" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-brand-500 transition">
                 <i data-lucide="sun" class="h-4 w-4 hidden dark:inline"></i>
                 <i data-lucide="moon" class="h-4 w-4 dark:hidden"></i>
@@ -262,6 +269,22 @@
       <div class="max-w-5xl mx-auto px-6">
         <h2 class="text-3xl md:text-4xl font-bold" data-i18n="experience.title">Experience</h2>
         <div class="mt-8 space-y-6">
+          <!-- Ize Gestão Empresarial Experience -->
+          <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="font-semibold" data-i18n="experience.ize.role">Junior Full Stack Developer (Level 3) — Ize Gestão Empresarial</h3>
+                <p class="text-sm text-gray-500" data-i18n="experience.ize.meta">TypeScript, Python, PostgreSQL & Firebase • Jan 2026 — Present</p>
+              </div>
+            </div>
+            <ul class="mt-3 list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li data-i18n="experience.ize.b1">Developed and maintained full-stack applications using TypeScript and Python, ensuring seamless integration between front-end and back-end layers.</li>
+              <li data-i18n="experience.ize.b2">Built robust APIs and database structures with PostgreSQL and Firebase, applying best practices for scalability and performance.</li>
+              <li data-i18n="experience.ize.b3">Implemented workflow automation using n8n to optimize processes and improve system efficiency.</li>
+              <li data-i18n="experience.ize.b4">Collaborated with design teams using Figma and managed databases with DBeaver for comprehensive development cycles.</li>
+            </ul>
+          </div>
+
           <!-- UGestor Experience -->
           <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 glass" data-aos="fade-up">
             <div class="flex flex-wrap items-center justify-between gap-2">

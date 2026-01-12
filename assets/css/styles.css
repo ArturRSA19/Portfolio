@@ -549,6 +549,31 @@ select:focus {
   opacity: 0;
 }
 
+/* Language Toggle Buttons */
+.lang-btn, .lang-btn-mobile {
+  color: rgb(107, 114, 128);
+  position: relative;
+}
+
+.lang-btn:hover, .lang-btn-mobile:hover {
+  color: rgb(31, 41, 55);
+}
+
+.dark .lang-btn:hover, .dark .lang-btn-mobile:hover {
+  color: rgb(243, 244, 246);
+}
+
+.lang-btn.active, .lang-btn-mobile.active {
+  background: linear-gradient(135deg, rgb(15, 194, 192) 0%, rgb(20, 184, 166) 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(15, 194, 192, 0.3);
+}
+
+.lang-btn.active:hover, .lang-btn-mobile.active:hover {
+  color: white;
+  box-shadow: 0 4px 12px rgba(15, 194, 192, 0.4);
+}
+
 /* Responsive adjustments for certificates */
 @media (max-width: 768px) {
   .certificate-card {
