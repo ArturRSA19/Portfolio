@@ -38,6 +38,172 @@ function initMobileMenu() {
   });
 }
 
+// Build Featured Project Section
+function buildFeaturedProject() {
+  const container = $('#featured-project-container');
+  if (!container || !featuredProject) return;
+
+  const locale = localStorage.getItem('locale') || 'en';
+  const t = (obj) => obj[locale] || obj.en;
+  const tList = (obj) => obj[locale] || obj.en;
+
+  const statusKey = featuredProject.status === 'completed'
+    ? 'featured.status_completed'
+    : 'featured.status_in_progress';
+  const statusLabel = featuredProject.status === 'completed' ? 'Completed' : 'In Progress';
+
+  const hasDemo = featuredProject.demoUrl && featuredProject.demoUrl.trim() !== '';
+
+  const techTagsHTML = featuredProject.technologies
+    .map(tech => `<span class="tag tag-light">${tech}</span>`)
+    .join('');
+
+  const featuresHTML = tList(featuredProject.features)
+    .map(f => `
+      <li class="feature-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>${f}</span>
+      </li>
+    `).join('');
+
+  const learningsHTML = tList(featuredProject.learnings)
+    .map(l => `
+      <li class="learning-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>${l}</span>
+      </li>
+    `).join('');
+
+  const differentialsHTML = tList(featuredProject.differentials)
+    .map(d => `
+      <li class="learning-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span>${d}</span>
+      </li>
+    `).join('');
+
+  const card = document.createElement('div');
+  card.className = 'featured-card glass border border-gray-200 dark:border-gray-800';
+  card.setAttribute('data-aos', 'fade-up');
+  card.setAttribute('data-aos-delay', '100');
+
+  card.innerHTML = `
+    <!-- Header -->
+    <div class="featured-header-gradient p-6 pb-4 md:p-8 md:pb-5">
+      <div class="flex flex-wrap items-center gap-3 mb-3">
+        <span class="status-badge status-badge--completed">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-i18n="${statusKey}">${statusLabel}</span>
+        </span>
+        <span class="type-badge">${t(featuredProject.type)}</span>
+        <span class="text-xs text-gray-400 dark:text-gray-500" data-i18n="featured.services_count">9 orchestrated services</span>
+      </div>
+      <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-50 leading-tight">
+        ${t(featuredProject.name)}
+      </h3>
+      <p class="mt-2 text-sm md:text-base text-brand-600 dark:text-brand-400 font-medium">
+        ${t(featuredProject.tagline)}
+      </p>
+    </div>
+
+    <!-- Body -->
+    <div class="p-6 md:p-8 pt-2 md:pt-3">
+      <!-- Description -->
+      <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+        ${t(featuredProject.description)}
+      </p>
+
+      <!-- Technologies -->
+      <div class="mb-6">
+        <span class="featured-section-label" data-i18n="featured.technologies">Technologies</span>
+        <div class="flex flex-wrap gap-1.5 mt-2">
+          ${techTagsHTML}
+        </div>
+      </div>
+
+      <!-- Two-column layout for features + expandable sections -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Features -->
+        <div>
+          <span class="featured-section-label" data-i18n="featured.features">Key Features</span>
+          <ul class="mt-3 space-y-2.5" role="list">
+            ${featuresHTML}
+          </ul>
+        </div>
+
+        <!-- Expandable panels -->
+        <div class="space-y-3">
+          <!-- Technical Highlights -->
+          <details class="featured-details">
+            <summary>
+              <span data-i18n="featured.differentials">Technical Highlights</span>
+              <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="details-content">
+              <ul class="space-y-2" role="list">
+                ${differentialsHTML}
+              </ul>
+            </div>
+          </details>
+
+          <!-- Technical Architecture -->
+          <details class="featured-details">
+            <summary>
+              <span data-i18n="featured.technical_details">Technical Architecture</span>
+              <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="details-content">
+              <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                ${t(featuredProject.technicalDescription)}
+              </p>
+            </div>
+          </details>
+
+          <!-- Learnings -->
+          <details class="featured-details">
+            <summary>
+              <span data-i18n="featured.learnings">Technical Learnings</span>
+              <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="details-content">
+              <p class="text-xs text-gray-400 dark:text-gray-500 mb-2" data-i18n="featured.learnings_hint">What I learned building this project</p>
+              <ul class="space-y-2" role="list">
+                ${learningsHTML}
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="project-actions">
+        <a href="${featuredProject.repoUrl}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="project-btn project-btn-primary"
+           aria-label="View BiblioTech repository on GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:0.5rem"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <span data-i18n="featured.view_repo">View Repository</span>
+        </a>
+        ${hasDemo ? `
+        <a href="${featuredProject.demoUrl}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="project-btn project-btn-secondary"
+           aria-label="View BiblioTech live demo">
+          <span data-i18n="projects.see_live">See Live</span>
+        </a>` : ''}
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = '';
+  container.appendChild(card);
+
+  // Apply tilt effect (same as project cards)
+  applyTiltEffect(card, 0);
+}
+
 // Build Projects Grid
 function buildProjectsGrid() {
   const grid = $('#project-grid');
@@ -318,6 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Build dynamic content
+  buildFeaturedProject();
   buildProjectsGrid();
   
   // Apply tilt effect to profile image

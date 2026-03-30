@@ -32,6 +32,20 @@ const I18N = {
     'skills.devops': 'DevOps & QA',
     'skills.a11y': 'Accessibility (WCAG)',
     
+    'featured.title': 'Featured Project',
+    'featured.subtitle': 'Flagship project showcasing full-stack architecture and modern engineering practices',
+    'featured.technologies': 'Technologies',
+    'featured.features': 'Key Features',
+    'featured.learnings': 'Technical Learnings',
+    'featured.learnings_hint': 'What I learned building this project',
+    'featured.differentials': 'Technical Highlights',
+    'featured.technical_details': 'Technical Architecture',
+    'featured.view_repo': 'View Repository',
+    'featured.type_label': 'Project Type',
+    'featured.status_completed': 'Completed',
+    'featured.status_in_progress': 'In Progress',
+    'featured.services_count': '9 orchestrated services',
+    
     'projects.title': 'Projects',
     'projects.see_all': 'See all →',
     'projects.source_code': 'Source Code',
@@ -113,7 +127,20 @@ const I18N = {
     'skills.devops': 'DevOps & QA',
     'skills.a11y': 'Acessibilidade (WCAG)',
     
-    'featured.title': 'Destaques',
+    'featured.title': 'Projeto em Destaque',
+    'featured.subtitle': 'Projeto principal demonstrando arquitetura full-stack e práticas modernas de engenharia',
+    'featured.technologies': 'Tecnologias',
+    'featured.features': 'Funcionalidades Principais',
+    'featured.learnings': 'Aprendizados Técnicos',
+    'featured.learnings_hint': 'O que aprendi construindo este projeto',
+    'featured.differentials': 'Destaques Técnicos',
+    'featured.technical_details': 'Arquitetura Técnica',
+    'featured.view_repo': 'Ver Repositório',
+    'featured.type_label': 'Tipo de Projeto',
+    'featured.status_completed': 'Concluído',
+    'featured.status_in_progress': 'Em Andamento',
+    'featured.services_count': '9 serviços orquestrados',
+    
     'projects.title': 'Projetos',
     'projects.see_all': 'Ver todos →',
     'projects.source_code': 'Código Fonte',
@@ -188,6 +215,11 @@ function setLocale(locale) {
   // Update certificates content if certificates section is visible
   if (typeof refreshCertificatesContent === 'function') {
     refreshCertificatesContent();
+  }
+
+  // Rebuild featured project with new locale content
+  if (typeof buildFeaturedProject === 'function') {
+    buildFeaturedProject();
   }
 }
 
