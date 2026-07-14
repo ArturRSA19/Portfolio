@@ -48,63 +48,66 @@ function buildCertificatesGrid() {
   
   certificatesData.certificates.forEach((certificate, idx) => {
     const card = document.createElement('div');
-    card.className = 'group relative certificate-card border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden glass';
+    card.className = 'group relative certificate-card card overflow-hidden';
     card.setAttribute('data-aos', 'fade-up');
     card.setAttribute('data-aos-delay', String(idx * 100));
-    
+
     // Get localized content
     const name = typeof certificate.name === 'object' ? certificate.name[currentLocale] : certificate.name;
     const issuer = typeof certificate.issuer === 'object' ? certificate.issuer[currentLocale] : certificate.issuer;
     const description = typeof certificate.description === 'object' ? certificate.description[currentLocale] : certificate.description;
-    
+
     card.innerHTML = `
       <div class="p-8">
         <div class="flex items-start justify-between mb-6">
           <div>
-            <h3 class="text-xl font-semibold mb-2">${name}</h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-2">${issuer}</p>
-            <p class="text-sm text-gray-500">${certificate.date}</p>
+            <h3 class="font-display text-xl font-semibold mb-2 text-zinc-50">${name}</h3>
+            <p class="text-zinc-300 mb-2">${issuer}</p>
+            <p class="text-sm text-zinc-500">${certificate.date}</p>
           </div>
           <div class="flex-shrink-0">
-            <i data-lucide="award" class="h-8 w-8 text-brand-500"></i>
+            <i data-lucide="award" class="h-8 w-8 text-brand-400"></i>
           </div>
         </div>
-        
-        <p class="text-gray-600 dark:text-gray-300 mb-6">${description}</p>
-        
+
+        <p class="text-zinc-300 mb-6">${description}</p>
+
         <div class="flex items-center gap-4">
-          <a href="${certificate.path}" 
-             target="_blank" 
-             rel="noopener" 
-             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-glow transition">
-            <i data-lucide="external-link" class="h-4 w-4"></i>
-            <span data-i18n="certificates.view">View Certificate</span>
-          </a>
-          <a href="${certificate.path}" 
+          ${renderButton({
+            href: certificate.path,
+            label: 'View Certificate',
+            variant: 'primary',
+            i18nKey: 'certificates.view',
+            icon: '<i data-lucide="external-link" class="h-4 w-4"></i>'
+          })}
+          <a href="${certificate.path}"
              download="${certificate.fileName}"
-             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-500 transition">
+             class="btn btn-secondary">
             <i data-lucide="download" class="h-4 w-4"></i>
             <span>Download</span>
           </a>
         </div>
       </div>
     `;
-    
+
     grid.appendChild(card);
   });
-  
+
   // Initialize Lucide icons for the new content only once
   setTimeout(() => {
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
     }
   }, 50);
+
+  // Late-injected nodes need AOS to re-scan the DOM to animate correctly
+  if (window.AOS) AOS.refresh();
 }
 
 // Navigation functions
 function showCertificatesSection() {
   // Hide all main sections
-  const sections = ['#home', '#values', '#skills', '#projects', '#experience', '#contact'];
+  const sections = ['#home', '#values', '#skills', '#featured', '#projects', '#experience', '#contact'];
   sections.forEach(selector => {
     const section = $(selector);
     if (section) section.style.display = 'none';
@@ -143,7 +146,7 @@ function hideCertificatesSection() {
   }
   
   // Show all main sections
-  const sections = ['#home', '#values', '#skills', '#projects', '#experience', '#contact'];
+  const sections = ['#home', '#values', '#skills', '#featured', '#projects', '#experience', '#contact'];
   sections.forEach(selector => {
     const section = $(selector);
     if (section) section.style.display = 'block';

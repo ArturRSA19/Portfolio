@@ -15,20 +15,18 @@ function updateCVButton() {
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-// Theme toggle functionality
-function toggleTheme() {
-  const root = document.documentElement;
-  const isDark = root.classList.toggle('dark');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+// ===== REUSABLE RENDER HELPERS =====
+function renderBadge(text, variant = 'default') {
+  const variantClass = variant === 'accent' ? 'badge badge-accent' : 'badge';
+  return `<span class="${variantClass}">${text}</span>`;
 }
 
-// Initialize theme on page load
-function initTheme() {
-  const ls = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (ls === 'dark' || (!ls && prefersDark)) {
-    document.documentElement.classList.add('dark');
-  }
+function renderButton({ href, label, variant = 'secondary', i18nKey, ariaLabel, target = '_blank', icon = '' }) {
+  const variantClass = variant === 'primary' ? 'btn btn-primary' : variant === 'tertiary' ? 'btn btn-tertiary' : 'btn btn-secondary';
+  const targetAttrs = target ? `target="${target}" rel="noopener noreferrer"` : '';
+  const ariaAttr = ariaLabel ? `aria-label="${ariaLabel}"` : '';
+  const i18nAttr = i18nKey ? `data-i18n="${i18nKey}"` : '';
+  return `<a href="${href}" ${targetAttrs} ${ariaAttr} class="${variantClass}">${icon}<span ${i18nAttr}>${label}</span></a>`;
 }
 
 // Mobile menu functionality
@@ -55,7 +53,7 @@ function buildFeaturedProject() {
   const hasDemo = featuredProject.demoUrl && featuredProject.demoUrl.trim() !== '';
 
   const techTagsHTML = featuredProject.technologies
-    .map(tech => `<span class="tag tag-light">${tech}</span>`)
+    .map(tech => renderBadge(tech))
     .join('');
 
   const featuresHTML = tList(featuredProject.features)
@@ -83,7 +81,7 @@ function buildFeaturedProject() {
     `).join('');
 
   const card = document.createElement('div');
-  card.className = 'featured-card glass border border-gray-200 dark:border-gray-800';
+  card.className = 'featured-card card';
   card.setAttribute('data-aos', 'fade-up');
   card.setAttribute('data-aos-delay', '100');
 
@@ -95,13 +93,13 @@ function buildFeaturedProject() {
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
           <span data-i18n="${statusKey}">${statusLabel}</span>
         </span>
-        <span class="type-badge">${t(featuredProject.type)}</span>
-        <span class="text-xs text-gray-400 dark:text-gray-500" data-i18n="featured.services_count">9 orchestrated services</span>
+        <span class="badge badge-accent">${t(featuredProject.type)}</span>
+        <span class="text-xs text-zinc-500" data-i18n="featured.services_count">9 orchestrated services</span>
       </div>
-      <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-50 leading-tight">
+      <h3 class="font-display text-2xl md:text-3xl font-bold text-zinc-50 leading-tight tracking-[-0.02em]">
         ${t(featuredProject.name)}
       </h3>
-      <p class="mt-2 text-sm md:text-base text-brand-600 dark:text-brand-400 font-medium">
+      <p class="mt-2 text-sm md:text-base text-brand-400 font-medium">
         ${t(featuredProject.tagline)}
       </p>
     </div>
@@ -109,7 +107,7 @@ function buildFeaturedProject() {
     <!-- Body -->
     <div class="p-6 md:p-8 pt-2 md:pt-3">
       <!-- Description -->
-      <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+      <p class="text-sm text-zinc-300 leading-relaxed mb-6">
         ${t(featuredProject.description)}
       </p>
 
@@ -153,7 +151,7 @@ function buildFeaturedProject() {
               <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
             <div class="details-content">
-              <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p class="text-xs text-zinc-400 leading-relaxed">
                 ${t(featuredProject.technicalDescription)}
               </p>
             </div>
@@ -166,7 +164,7 @@ function buildFeaturedProject() {
               <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
             <div class="details-content">
-              <p class="text-xs text-gray-400 dark:text-gray-500 mb-2" data-i18n="featured.learnings_hint">What I learned building this project</p>
+              <p class="text-xs text-zinc-500 mb-2" data-i18n="featured.learnings_hint">What I learned building this project</p>
               <ul class="space-y-2" role="list">
                 ${learningsHTML}
               </ul>
@@ -177,22 +175,21 @@ function buildFeaturedProject() {
 
       <!-- Action Buttons -->
       <div class="project-actions">
-        <a href="${featuredProject.repoUrl}"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="project-btn project-btn-primary"
-           aria-label="View BiblioTech repository on GitHub">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:0.5rem"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          <span data-i18n="featured.view_repo">View Repository</span>
-        </a>
-        ${hasDemo ? `
-        <a href="${featuredProject.demoUrl}"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="project-btn project-btn-secondary"
-           aria-label="View BiblioTech live demo">
-          <span data-i18n="projects.see_live">See Live</span>
-        </a>` : ''}
+        ${renderButton({
+          href: featuredProject.repoUrl,
+          label: 'View Repository',
+          variant: 'primary',
+          i18nKey: 'featured.view_repo',
+          ariaLabel: 'View BiblioTech repository on GitHub',
+          icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>'
+        })}
+        ${hasDemo ? renderButton({
+          href: featuredProject.demoUrl,
+          label: 'See Live',
+          variant: 'secondary',
+          i18nKey: 'projects.see_live',
+          ariaLabel: 'View BiblioTech live demo'
+        }) : ''}
       </div>
     </div>
   `;
@@ -202,6 +199,9 @@ function buildFeaturedProject() {
 
   // Apply tilt effect (same as project cards)
   applyTiltEffect(card, 0);
+
+  // Late-injected nodes need AOS to re-scan the DOM to animate correctly
+  if (window.AOS) AOS.refresh();
 }
 
 // Build Projects Grid
@@ -214,47 +214,51 @@ function buildProjectsGrid() {
   
   projectData.projects.forEach((project, idx) => {
     const card = document.createElement('div');
-    card.className = 'group relative project-card border border-gray-200 dark:border-gray-800';
+    card.className = 'group relative project-card card';
     // Add unique identifier for debugging
     card.setAttribute('data-project-index', idx);
     card.setAttribute('data-aos', 'fade-up');
     card.setAttribute('data-aos-delay', String((idx % 3) * 100));
-    
+
     // Create buttons HTML
     const hasLiveUrl = project.liveUrl && project.liveUrl.trim() !== '';
     const buttonsHTML = `
       <div class="project-actions">
-        <a href="${project.repo}" 
-           target="_blank" 
-           rel="noopener" 
-           class="project-btn project-btn-primary"
-           aria-label="View ${project.title} source code">
-          <span data-i18n="projects.source_code">Source Code</span>
-        </a>
-        ${hasLiveUrl ? `
-          <a href="${project.liveUrl}" 
-             target="_blank" 
-             rel="noopener" 
-             class="project-btn project-btn-secondary"
-             aria-label="View ${project.title} live demo">
-            <span data-i18n="projects.see_live">See Live</span>
-          </a>
-        ` : ''}
+        ${renderButton({
+          href: project.repo,
+          label: 'Source Code',
+          variant: 'primary',
+          i18nKey: 'projects.source_code',
+          ariaLabel: `View ${project.title} source code`
+        })}
+        ${hasLiveUrl ? renderButton({
+          href: project.liveUrl,
+          label: 'See Live',
+          variant: 'secondary',
+          i18nKey: 'projects.see_live',
+          ariaLabel: `View ${project.title} live demo`
+        }) : ''}
       </div>
     `;
-    
+
     card.innerHTML = `
-      <div class="relative">
-        <img src="${project.image}" 
-             alt="${project.title}" 
-             class="w-full object-cover project-image" 
-             loading="lazy" />
-        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-gray-900/10 to-transparent"></div>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+        </div>
+        <div class="browser-media">
+          <img src="${project.image}"
+               alt="${project.title}"
+               class="project-image"
+               loading="lazy" />
+        </div>
       </div>
-      <div class="project-content p-6 bg-white/80 dark:bg-gray-950/80 backdrop-blur">
-        <h3 class="font-semibold text-lg mb-3">${project.title}</h3>
+      <div class="project-content p-6">
+        <h3 class="font-display font-semibold text-lg mb-3 text-zinc-50">${project.title}</h3>
         <div class="flex flex-wrap gap-1.5 mb-4">
-          ${project.tags.map(tag => `<span class='tag tag-light'>${tag}</span>`).join('')}
+          ${project.tags.map(tag => renderBadge(tag)).join('')}
         </div>
         ${buttonsHTML}
       </div>`;
@@ -264,6 +268,9 @@ function buildProjectsGrid() {
     
     grid.appendChild(card);
   });
+
+  // Late-injected nodes need AOS to re-scan the DOM to animate correctly
+  if (window.AOS) AOS.refresh();
 }
 
 // Apply 3D Tilt effect to individual card
@@ -454,15 +461,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = $('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Initialize theme
-  initTheme();
-
   // Initialize Lucide icons
   if (window.lucide) lucide.createIcons();
-
-  // Event listeners for theme toggles
-  $('#themeToggle')?.addEventListener('click', toggleTheme);
-  $('#themeToggleMobile')?.addEventListener('click', toggleTheme);
 
   // Initialize mobile menu
   initMobileMenu();
